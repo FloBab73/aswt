@@ -1,0 +1,23 @@
+- Core
+	- Charaktersteuerung
+	- Levelmanagement
+	- Interfaces
+		- Charakter
+		- Level
+		- Items
+		- Gegner
+- Applikation
+	- Implementierungen
+		- Charakter
+		- Level
+			- Interface levelgenerator
+		- Items
+		- Gegner
+	- Pygame steuerung
+	- Eingabeverarbeitung
+- Adapter
+	- Eingabeweiterleitung
+- Plugin
+	- Eingabe
+	- Ausgabe
+	- menu
