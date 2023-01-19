@@ -1,9 +1,13 @@
 import sys
+import os
 import pygame
 
 import generator
 from PhysicsEngine import PhysicsEngine
 from GraphicsEngine import GraphicsEngine
+
+if os.path.basename(os.getcwd()) == "src":
+    os.chdir("../")
 
 pygame.init()
 clock = pygame.time.Clock()
