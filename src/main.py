@@ -1,9 +1,8 @@
 import sys
 import pygame
-
-from src import generator
-from src.PhysicsEngine import PhysicsEngine
-from src.GraphicsEngine import GraphicsEngine
+import generator
+from PhysicsEngine import PhysicsEngine
+from GraphicsEngine import GraphicsEngine
 
 pygame.init()
 clock = pygame.time.Clock()

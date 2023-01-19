@@ -1,8 +1,6 @@
-import math
-
 import pygame
 
-from src.CollisionDetection import CollisionDetection
+from CollisionDetection import CollisionDetection
 
 
 class PhysicsEngine:
