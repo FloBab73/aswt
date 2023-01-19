@@ -2,7 +2,7 @@ import math
 
 import pygame
 
-from src.CollisionDetection import CollisionDetection
+from CollisionDetection import CollisionDetection
 
 
 class PhysicsEngine:
@@ -86,7 +86,7 @@ class PhysicsEngine:
             if self.velocityX > 0:
                 self.velocityX = 0
 
-        if key[pygame.K_UP] and touch["bottom"]:
+        if key[pygame.K_SPACE] and touch["bottom"]:
             self.velocityY = -9
 
         player = self.move(player, self.velocityX, self.velocityY)
