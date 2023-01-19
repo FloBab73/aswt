@@ -4,14 +4,15 @@ from src.plugin.CollisionDetection import CollisionDetection
 
 
 class PhysicsEngine:
-    velocityX = 0
-    velocityY = 0
+    velocity_x = 0
+    velocity_y = 0
     gravity = 1
     acceleration = 1
     deceleration = 1
+    maxSpeed = 2
 
     def __init__(self, blocks):
-        self.cD = CollisionDetection(blocks)
+        self.collisionDetection = CollisionDetection(blocks)
 
     def move(self, player, distance_x, distance_y):
         x = 0
@@ -42,7 +43,7 @@ class PhysicsEngine:
                 go_y = False
 
             player = player.move(x, y)
-            touch = self.cD.detect(player, 1)
+            touch = self.collisionDetection.detect(player, 1)
 
             if touch["bottom"]:
                 y = 0
@@ -53,40 +54,42 @@ class PhysicsEngine:
         return player
 
     def movement(self, player):
-        touch = self.cD.detect(player, 1)
-        if touch["top"]:
-            self.velocityY = 0
-        if touch["bottom"]:
-            self.velocityY = 0
-        else:
-            self.velocityY = self.velocityY + self.gravity
 
+        touch = self.collisionDetection.detect(player, 1)
         key = pygame.key.get_pressed()
-        if not touch["left"]:
-            if key[pygame.K_LEFT]:
-                if self.velocityX >= -2:
-                    self.velocityX -= self.acceleration
-            else:
-                if self.velocityX < 0:
-                    self.velocityX += self.deceleration
-        else:
-            if self.velocityX < 0:
-                self.velocityX = 0
 
-        if not touch["right"]:
-            if key[pygame.K_RIGHT]:
-                if self.velocityX <= 2:
-                    self.velocityX += self.acceleration
-            else:
-                if self.velocityX > 0:
-                    self.velocityX -= self.deceleration
+        if touch["bottom"]:
+            self.velocity_y = 0
+        elif touch["top"]:
+            self.velocity_y = self.gravity
         else:
-            if self.velocityX > 0:
-                self.velocityX = 0
+            self.velocity_y += self.gravity
+
+        if touch["left"]:
+            if self.velocity_x < 0:
+                self.velocity_x = 0
+        else:
+            if key[pygame.K_LEFT]:
+                if self.velocity_x >= -self.maxSpeed:
+                    self.velocity_x -= self.acceleration
+            else:
+                if self.velocity_x < 0:
+                    self.velocity_x += self.deceleration
+
+        if touch["right"]:
+            if self.velocity_x > 0:
+                self.velocity_x = 0
+        else:
+            if key[pygame.K_RIGHT]:
+                if self.velocity_x <= self.maxSpeed:
+                    self.velocity_x += self.acceleration
+            else:
+                if self.velocity_x > 0:
+                    self.velocity_x -= self.deceleration
 
         if key[pygame.K_UP] and touch["bottom"]:
-            self.velocityY = -9
+            self.velocity_y = -9
 
-        player = self.move(player, self.velocityX, self.velocityY)
+        player = self.move(player, self.velocity_x, self.velocity_y)
 
         return player

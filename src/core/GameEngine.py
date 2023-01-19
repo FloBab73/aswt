@@ -1,5 +1,3 @@
-import sys
-
 import pygame
 
 from src.core.PhysicsEngine import PhysicsEngine
@@ -11,21 +9,21 @@ class GameEngine:
     player = pygame.Rect(350, 0, 10, 10)
 
     def __init__(self, generator):
-        self.generator = generator
         self.blocks = generator.generate()
 
-        self.pEngine = PhysicsEngine(self.blocks)
-        self.gEngine = GraphicsEngine(self.blocks)
+        self.physicsEngine = PhysicsEngine(self.blocks)
+        self.graphicsEngine = GraphicsEngine(self.blocks)
 
     def run(self):
 
-        while True:
+        run = True
+        while run:
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    sys.exit()
+                    run = False
 
-            player = self.pEngine.movement(self.player)
-            self.gEngine.draw(player)
+            self.player = self.physicsEngine.movement(self.player)
+            self.graphicsEngine.draw(self.player)
 
             self.clock.tick(60)

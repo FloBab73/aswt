@@ -1,4 +1,3 @@
-
 import pygame
 
 from src.adapter.ArrayToPygameBlocks import ArrayToPygameBlocks
@@ -6,7 +5,7 @@ from src.core.GameEngine import GameEngine
 
 pygame.init()
 
-atpb = ArrayToPygameBlocks()
+blockConverter = ArrayToPygameBlocks()
 
-ge = GameEngine(atpb)
-ge.run()
+gameEngine = GameEngine(blockConverter)
+gameEngine.run()

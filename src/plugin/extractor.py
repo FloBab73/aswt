@@ -3,6 +3,6 @@ from PIL import Image
 
 
 def extract():
-    im = Image.open("res/map2.bmp")
-    p = np.array(im)
-    return p
+    image = Image.open("res/map2.bmp")
+    array = np.array(image)
+    return array
