@@ -1,4 +1,5 @@
 import pygame.draw
+from src.plugin.GameBlock import GameBlock
 
 from src.core.Generator import Generator
 from src.plugin import extractor
@@ -12,5 +13,5 @@ class ArrayToPygameBlocks(Generator):
         for x in range(len(array)):
             for y in range(len(array[0])):
                 if array[x][y] == 1:
-                    result.append(pygame.Rect(y * 20, x * 20, 20, 20))
+                    result.append(GameBlock(y * 20, x * 20, 20, 20, GameBlock.WALL))
         return result

@@ -1,6 +1,7 @@
 import pygame
 
 from src.plugin.CollisionDetection import CollisionDetection
+from src.plugin.GameBlock import GameBlock
 
 
 class PhysicsEngine:
@@ -11,12 +12,13 @@ class PhysicsEngine:
     deceleration = 1
     maxSpeed = 2
 
-    def __init__(self, blocks):
-        self.collisionDetection = CollisionDetection(blocks)
+    def __init__(self, collisionDetection):
+        self.collisionDetection = collisionDetection
 
     def move(self, player, distance_x, distance_y):
         x = 0
         y = 0
+        event = []
         if distance_x < 0:
             x = -1
             distance_x = abs(distance_x)
@@ -45,19 +47,25 @@ class PhysicsEngine:
             player = player.move(x, y)
             touch = self.collisionDetection.detect(player, 1)
 
-            if touch["bottom"]:
-                y = 0
-            if touch["top"]:
+            
+            if touch["hasEvent"]:
+                print("Item Gefunden 2")
+                event = touch["event"]
+            if touch["bottom"] or touch["top"]:
                 y = 0
             if touch["left"] or touch["right"]:
                 x = 0
-        return player
+
+        return player, event
 
     def movement(self, player):
-
+        event = []
         touch = self.collisionDetection.detect(player, 1)
         key = pygame.key.get_pressed()
 
+        if touch["hasEvent"]:
+                print("Item Gefunden 1")
+                event = touch["event"]
         if touch["bottom"]:
             self.velocity_y = 0
         elif touch["top"]:
@@ -90,6 +98,6 @@ class PhysicsEngine:
         if key[pygame.K_UP] and touch["bottom"]:
             self.velocity_y = -9
 
-        player = self.move(player, self.velocity_x, self.velocity_y)
+        player, event = self.move(player, self.velocity_x, self.velocity_y)
 
-        return player
+        return player, event

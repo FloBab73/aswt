@@ -1,4 +1,5 @@
 import pygame
+from src.core.BlockType import BlockType
 
 
 class GraphicsEngine:
@@ -11,7 +12,10 @@ class GraphicsEngine:
         self.screen.fill(0)
 
         for block in self.blocks:
-            pygame.draw.rect(self.screen, (0, 255, 0), block)
+            if block.blockType == BlockType.ITEM:
+                pygame.draw.rect(self.screen, (128, 0, 0), block)
+            else:
+                pygame.draw.rect(self.screen, (0, 255, 0), block)
 
         pygame.draw.rect(self.screen, (255, 255, 255), player)
 
