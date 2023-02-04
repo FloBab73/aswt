@@ -1,8 +1,9 @@
 class GraphicsEngine:
-    blocks = None
+    gameBlocks = None
 
-    def init(self, blocks):
-        self.blocks = blocks
+    def __init__(self, gameBlocks, activeBlocks):
+        self.activeBlocks = activeBlocks
+        self.gameBlocks = gameBlocks
 
-    def draw(self, player):
+    def draw(self):
         pass

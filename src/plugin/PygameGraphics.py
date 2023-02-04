@@ -7,20 +7,21 @@ from src.core.GraphicsEngine import GraphicsEngine
 class PygameGraphics(GraphicsEngine):
     screen = None
 
-    def init(self, blocks):
-        super().init(blocks)
+    def __init__(self, gameBlocks, activeBlocks):
+        super().__init__(gameBlocks, activeBlocks)
         self.screen = pygame.display.set_mode((800, 600))
 
-    def draw(self, player):
-        pygamePlayer = pygame.Rect(player.position())
+    def draw(self):
         self.screen.fill(0)
 
-        for block in self.blocks:
-            if block.blockType == BlockType.ITEM:
-                pygame.draw.rect(self.screen, (128, 0, 0), block.pygameBlock)
+        for gameBlock in self.gameBlocks:
+            if gameBlock.blockType == BlockType.ITEM_HEAL:
+                pygame.draw.rect(self.screen, (255, 255, 0), gameBlock.pygameBlock)
             else:
-                pygame.draw.rect(self.screen, (0, 255, 0), block.pygameBlock)
+                pygame.draw.rect(self.screen, (0, 255, 0), gameBlock.pygameBlock)
 
-        pygame.draw.rect(self.screen, (255, 255, 255), pygamePlayer)
+        for activeBlock in self.activeBlocks:
+            if activeBlock.blockType == BlockType.PLAYER:
+                pygame.draw.rect(self.screen, (255, 255, 255), activeBlock.pygameBlock)
 
         pygame.display.update()

@@ -8,3 +8,6 @@ class GameBlock:
         self.width = width
         self.y = y
         self.x = x
+
+    def position(self):
+        return [self.x, self.y, self.width, self.height]

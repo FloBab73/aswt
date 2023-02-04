@@ -1,22 +1,15 @@
 import pygame
 
 from src.core.PhysicsEngine import PhysicsEngine
-from src.core.Player import Player
 
 
 class PygamePhysics(PhysicsEngine):
-    velocity_x = 0
-    velocity_y = 0
-    gravity = 1
-    acceleration = 1
-    deceleration = 1
-    maxSpeed = 2
 
-    def __init__(self, collisionDetection):
-        super().__init__(collisionDetection)
+    def __init__(self, collisionDetection, activeBlocks):
+        super().__init__(collisionDetection, activeBlocks)
 
     # moves player one pixel at a time to stop at the right moment
-    def move(self, player, distance_x, distance_y):
+    def move(self, index, distance_x, distance_y):
         x = 0
         y = 0
         event = []
@@ -45,8 +38,9 @@ class PygamePhysics(PhysicsEngine):
                 y = 0
                 go_y = False
 
-            player = player.move(x, y)
-            touch = self.collisionDetection.detect(player, 1)
+            self.activeBlocks[index].moveBlock(x, y)
+
+            touch = self.collisionDetection.detect(0, 1)
 
             if touch["hasEvent"]:
                 event = touch["event"]
@@ -55,13 +49,11 @@ class PygamePhysics(PhysicsEngine):
             if touch["left"] or touch["right"]:
                 x = 0
 
-        return player, event
+        return event
 
     # checks for button input and calculates movement
-    def movement(self, player):
-        pygamePlayer = pygame.Rect(player.position())
-
-        touch = self.collisionDetection.detect(pygamePlayer, 1)
+    def movement(self):
+        touch = self.collisionDetection.detect(0, 1)
         key = pygame.key.get_pressed()
 
         if touch["bottom"]:
@@ -96,6 +88,5 @@ class PygamePhysics(PhysicsEngine):
         if key[pygame.K_UP] and touch["bottom"]:
             self.velocity_y = -9
 
-        pygamePlayer, event = self.move(pygamePlayer, self.velocity_x, self.velocity_y)
-        player = Player(pygamePlayer.x, pygamePlayer.y, pygamePlayer.width, pygamePlayer.height)
-        return player, event
+        event = self.move(0, self.velocity_x, self.velocity_y)
+        return event

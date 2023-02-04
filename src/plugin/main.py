@@ -14,8 +14,8 @@ from src.adapter.PygameBlocksGenerator import PygameBlocksGenerator
 from src.core.GameEngine import GameEngine
 
 pygame.init()
-pygameStaticBlocks = PygameBlocksGenerator().generate()
+gameBlocks, activeBlocks = PygameBlocksGenerator().generate()
 
-gameEngine = GameEngine(pygameStaticBlocks, PygameGraphics(),
-                        PygamePhysics(PygameCollisionDetection(pygameStaticBlocks)))
+gameEngine = GameEngine(gameBlocks, PygameGraphics(gameBlocks, activeBlocks),
+                        PygamePhysics(PygameCollisionDetection(gameBlocks, activeBlocks), activeBlocks))
 gameEngine.run()
