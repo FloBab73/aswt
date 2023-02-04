@@ -1,19 +1,18 @@
 import pygame
 
-from src.core.PhysicsEngine import PhysicsEngine
-from src.plugin.CollisionDetection import CollisionDetection
-from src.plugin.GraphicsEngine import GraphicsEngine
+from src.core.Player import Player
 
 
 class GameEngine:
     clock = pygame.time.Clock()
-    player = pygame.Rect(350, 0, 10, 10)
+    player = Player(350, 0, 10, 10)
 
-    def __init__(self, generator):
-        self.blocks = generator.generate()
+    def __init__(self, gameBlocks, graphicsEngine, physicsEngine):
+        self.graphicsEngine = graphicsEngine
+        self.gameBlocks = gameBlocks
+        self.physicsEngine = physicsEngine
 
-        self.physicsEngine = PhysicsEngine(CollisionDetection(self.blocks))
-        self.graphicsEngine = GraphicsEngine(self.blocks)
+        self.graphicsEngine.init(self.gameBlocks)
 
     def run(self):
         run = True
@@ -26,8 +25,7 @@ class GameEngine:
 
             if len(events) > 0:
                 if events["type"] == "item":
-                    self.blocks.remove(events["block"])
-                    print("remove Item")
+                    self.gameBlocks.remove(events["block"])
 
             self.graphicsEngine.draw(self.player)
 

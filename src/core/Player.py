@@ -1,7 +1,10 @@
+from src.core.GameBlock import GameBlock
+
+
 class Player:
 
     def __init__(self, x, y, w, h):
-        self.x = x
-        self.y = y
-        self.w = w
-        self.h = h
+        self.pos = GameBlock(x, y, w, h)
+
+    def position(self):
+        return [self.pos.x, self.pos.y, self.pos.width, self.pos.height]
