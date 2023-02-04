@@ -1,8 +1,6 @@
-import pygame.draw
-from src.plugin.GameBlock import GameBlock
-
 from src.core.Generator import Generator
 from src.plugin import extractor
+from src.plugin.GameBlock import GameBlock
 
 
 class ArrayToPygameBlocks(Generator):

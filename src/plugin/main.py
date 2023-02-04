@@ -1,6 +1,8 @@
+import os
+import sys
+
 import pygame
 
-import sys, os
 print("In module products sys.path[0], __package__ ==", sys.path[0], __package__)
 sys.path[0] = os.getcwd()
 

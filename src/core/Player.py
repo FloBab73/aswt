@@ -5,4 +5,3 @@ class Player:
         self.y = y
         self.w = w
         self.h = h
-

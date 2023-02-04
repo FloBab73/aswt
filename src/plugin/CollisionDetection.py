@@ -1,5 +1,5 @@
-import pygame
 from src.plugin.GameBlock import GameBlock
+
 
 def checkBlock(touch, direction, block):
     if block.blockType == GameBlock.ITEM:
@@ -8,6 +8,7 @@ def checkBlock(touch, direction, block):
     else:
         touch[direction] = True
     return touch
+
 
 class CollisionDetection:
     blocks = []
@@ -19,14 +20,14 @@ class CollisionDetection:
         blocks.append(GameBlock(0, -2, 800, 2, GameBlock.WALL))
         blocks.append(GameBlock(300, 30, 10, 10, GameBlock.ITEM))
         self.blocks = blocks
-        self.dummyBlock = GameBlock(0,0,0,0)
+        self.dummyBlock = GameBlock(0, 0, 0, 0)
 
     def detect(self, player, border):
         touch = {
-            "right":    False,
-            "left":     False,
-            "bottom":   False,
-            "top":      False,
+            "right": False,
+            "left": False,
+            "bottom": False,
+            "top": False,
             "hasEvent": False
         }
 
