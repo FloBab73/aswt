@@ -18,7 +18,6 @@ class CollisionDetection:
         blocks.append(GameBlock(0, 600, 800, 2, GameBlock.WALL))
         blocks.append(GameBlock(-2, 0, 2, 600, GameBlock.WALL))
         blocks.append(GameBlock(0, -2, 800, 2, GameBlock.WALL))
-        blocks.append(GameBlock(300, 30, 10, 10, GameBlock.ITEM))
         self.blocks = blocks
         self.dummyBlock = GameBlock(0, 0, 0, 0)
 
@@ -34,7 +33,7 @@ class CollisionDetection:
         for block in self.blocks:
             if block.clipline(player.x + player.w - 1 + border, player.y, player.x + player.w - 1 + border,
                               player.y + player.h - 1):
-                touch = checkBlock(touch, "left", block)
+                touch = checkBlock(touch, "right", block)
             if block.clipline(player.x + player.w - 1, player.y + player.h - 1 + border, player.x,
                               player.y + player.h - 1 + border):
                 touch = checkBlock(touch, "bottom", block)

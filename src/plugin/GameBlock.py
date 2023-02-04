@@ -9,8 +9,8 @@ class GameBlock(pygame.Rect):
     SECRET = BlockType.SECRET
     ITEM = BlockType.ITEM
 
-    def __init__(self, left, top, width, height, blockType=BlockType.NON):
-        super().__init__(left, top, width, height)
+    def __init__(self, x, y, width, height, blockType=BlockType.NON):
+        super().__init__(x, y, width, height)
         self._blockType = blockType
 
     @property
