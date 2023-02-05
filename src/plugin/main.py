@@ -14,6 +14,7 @@ from src.adapter.PygameBlocksGenerator import PygameBlocksGenerator
 from src.core.GameEngine import GameEngine
 
 pygame.init()
+# generate game blocks, differentiate between active and passive blocks
 gameBlocks, activeBlocks = PygameBlocksGenerator().generate()
 
 gameEngine = GameEngine(gameBlocks, PygameGraphics(gameBlocks, activeBlocks),

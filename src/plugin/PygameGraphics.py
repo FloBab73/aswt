@@ -12,16 +12,24 @@ class PygameGraphics(GraphicsEngine):
         self.screen = pygame.display.set_mode((800, 600))
 
     def draw(self):
-        self.screen.fill(0)
+        self.screen.fill([200, 150, 0])
 
         for gameBlock in self.gameBlocks:
             if gameBlock.blockType == BlockType.ITEM_HEAL:
-                pygame.draw.rect(self.screen, (255, 255, 0), gameBlock.pygameBlock)
+                pygame.draw.rect(self.screen, (100, 255, 0), gameBlock.pygameBlock)
+            elif gameBlock.blockType == BlockType.ITEM_KEY:
+                pygame.draw.rect(self.screen, (0, 38, 200), gameBlock.pygameBlock)
+            elif gameBlock.blockType == BlockType.ITEM_VALUABLE:
+                pygame.draw.rect(self.screen, (0, 200, 200), gameBlock.pygameBlock)
+            elif gameBlock.blockType == BlockType.DOOR:
+                pygame.draw.rect(self.screen, (64, 64, 64), gameBlock.pygameBlock)
             else:
-                pygame.draw.rect(self.screen, (0, 255, 0), gameBlock.pygameBlock)
+                pygame.draw.rect(self.screen, (100, 50, 0), gameBlock.pygameBlock)
 
         for activeBlock in self.activeBlocks:
             if activeBlock.blockType == BlockType.PLAYER:
                 pygame.draw.rect(self.screen, (255, 255, 255), activeBlock.pygameBlock)
+            if activeBlock.blockType == BlockType.ENEMY:
+                pygame.draw.rect(self.screen, (255, 0, 0), activeBlock.pygameBlock)
 
         pygame.display.update()

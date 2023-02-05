@@ -10,5 +10,5 @@ class BlockType(Enum):
     NPC = 5
     ITEM_HEAL = 6
     ITEM_KEY = 7
-    ITEM_COLLECTABLE = 8
+    ITEM_VALUABLE = 8
     DOOR = 9
