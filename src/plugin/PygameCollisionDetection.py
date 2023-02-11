@@ -12,7 +12,6 @@ class PygameCollisionDetection(CollisionDetection):
         gameBlocks.append(PygameGameBlock(0, 600, 800, 2, BlockType.WALL))
         gameBlocks.append(PygameGameBlock(-2, 0, 2, 600, BlockType.WALL))
         gameBlocks.append(PygameGameBlock(0, -2, 800, 2, BlockType.WALL))
-        self.dummyBlock = PygameGameBlock(0, 0, 0, 0)
 
     def detect(self, index, border):
         touch = {
@@ -24,19 +23,19 @@ class PygameCollisionDetection(CollisionDetection):
         }
         subject = self.activeBlocks[index]
         for block in self.gameBlocks:
-            if block.pygameBlock.clipline(subject.x + subject.width - 1 + border, subject.y,
-                                          subject.x + subject.width - 1 + border,
-                                          subject.y + subject.height - 1):
+            if block.position().clipline(subject.x + subject.width - 1 + border, subject.y,
+                                         subject.x + subject.width - 1 + border,
+                                         subject.y + subject.height - 1):
                 touch = self.checkBlock(touch, "right", block)
-            if block.pygameBlock.clipline(subject.x + subject.width - 1, subject.y + subject.height - 1 + border,
-                                          subject.x,
-                                          subject.y + subject.height - 1 + border):
+            if block.position().clipline(subject.x + subject.width - 1, subject.y + subject.height - 1 + border,
+                                         subject.x,
+                                         subject.y + subject.height - 1 + border):
                 touch = self.checkBlock(touch, "bottom", block)
-            if block.pygameBlock.clipline(subject.x - border, subject.y, subject.x - border,
-                                          subject.y + subject.height - 1):
+            if block.position().clipline(subject.x - border, subject.y, subject.x - border,
+                                         subject.y + subject.height - 1):
                 touch = self.checkBlock(touch, "left", block)
-            if block.pygameBlock.clipline(subject.x, subject.y - border, subject.x + subject.width - 1,
-                                          subject.y - border):
+            if block.position().clipline(subject.x, subject.y - border, subject.x + subject.width - 1,
+                                         subject.y - border):
                 touch = self.checkBlock(touch, "top", block)
 
         return touch
