@@ -19,4 +19,14 @@ gameBlocks, activeBlocks = PygameBlocksGenerator().generate()
 
 gameEngine = GameEngine(gameBlocks, PygameGraphics(gameBlocks, activeBlocks),
                         PygamePhysics(PygameCollisionDetection(gameBlocks, activeBlocks), activeBlocks))
-gameEngine.run()
+
+run = True
+while run:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+    clock = pygame.time.Clock()
+
+    gameEngine.run()
+
+    clock.tick(60)
