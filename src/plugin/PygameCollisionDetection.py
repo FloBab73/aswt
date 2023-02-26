@@ -6,12 +6,13 @@ from src.plugin.PygameGameBlock import PygameGameBlock
 class PygameCollisionDetection(CollisionDetection):
     gameBlocks = []
 
-    def __init__(self, gameBlocks, activeBlocks):
+    def __init__(self, gameBlocks, activeBlocks, eventHandler):
         super().__init__(gameBlocks, activeBlocks)
         gameBlocks.append(PygameGameBlock(800, 0, 2, 600, BlockType.WALL))
         gameBlocks.append(PygameGameBlock(0, 600, 800, 2, BlockType.WALL))
         gameBlocks.append(PygameGameBlock(-2, 0, 2, 600, BlockType.WALL))
         gameBlocks.append(PygameGameBlock(0, -2, 800, 2, BlockType.WALL))
+        self.eventHandler = eventHandler
 
     def detect(self, index, border):
         touch = {
@@ -40,11 +41,11 @@ class PygameCollisionDetection(CollisionDetection):
 
         return touch
 
-    @staticmethod
-    def checkBlock(touch, direction, block):
+    def checkBlock(self, touch, direction, block):
         if block.blockType == BlockType.ITEM_HEAL:
             touch["hasEvent"] = True
             touch["event"] = {"type": "item", "block": block}
+            self.eventHandler(self.eventHandler.Events.Health, 25)
         else:
             touch[direction] = True
         return touch
