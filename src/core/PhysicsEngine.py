@@ -10,8 +10,5 @@ class PhysicsEngine:
         self.activeBlocks = activeBlocks
         self.collisionDetection = collisionDetection
 
-    def move(self, index, distance_x, distance_y):
-        pass
-
     def movement(self):
         pass
