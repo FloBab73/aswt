@@ -3,13 +3,13 @@ import sys
 
 import pygame
 
-from src.plugin.PygameCollisionDetection import PygameCollisionDetection
-from src.plugin.PygameGraphics import PygameGraphics
-from src.plugin.PygamePhysics import PygamePhysics
-
+# Für Daniel, damit es ohne pycharm funktioniert
 print("In module products sys.path[0], __package__ ==", sys.path[0], __package__)
 sys.path[0] = os.getcwd()
 
+from src.plugin.PygameCollisionDetection import PygameCollisionDetection
+from src.plugin.PygameGraphics import PygameGraphics
+from src.plugin.PygamePhysics import PygamePhysics
 from src.adapter.PygameBlocksGenerator import PygameBlocksGenerator
 from src.core.GameEngine import GameEngine
 
