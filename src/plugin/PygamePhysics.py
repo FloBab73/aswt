@@ -1,5 +1,3 @@
-import pygame
-
 from src.core.PhysicsEngine import PhysicsEngine
 
 
@@ -52,9 +50,8 @@ class PygamePhysics(PhysicsEngine):
         return event
 
     # checks for button input and calculates movement
-    def movement(self):
+    def movement(self, key):
         touch = self.collisionDetection.detect(0, 1)
-        key = pygame.key.get_pressed()
 
         if touch["bottom"]:
             self.velocity_y = 0
@@ -67,7 +64,7 @@ class PygamePhysics(PhysicsEngine):
             if self.velocity_x < 0:
                 self.velocity_x = 0
         else:
-            if key[pygame.K_LEFT]:
+            if key["left"]:
                 if self.velocity_x >= -self.maxSpeed:
                     self.velocity_x -= self.acceleration
             else:
@@ -78,14 +75,14 @@ class PygamePhysics(PhysicsEngine):
             if self.velocity_x > 0:
                 self.velocity_x = 0
         else:
-            if key[pygame.K_RIGHT]:
+            if key["right"]:
                 if self.velocity_x <= self.maxSpeed:
                     self.velocity_x += self.acceleration
             else:
                 if self.velocity_x > 0:
                     self.velocity_x -= self.deceleration
 
-        if key[pygame.K_UP] and touch["bottom"]:
+        if key["up"] and touch["bottom"]:
             self.velocity_y = -9
 
         event = self.move(0, self.velocity_x, self.velocity_y)
