@@ -1,7 +1,10 @@
+
 import os
 import sys
 
 import pygame
+
+from src.plugin.PygamePlayer import PygamePlayer
 
 # Für Daniel, damit es ohne pycharm funktioniert
 print("In module products sys.path[0], __package__ ==", sys.path[0], __package__)
@@ -17,10 +20,11 @@ from src.core.GameEngine import GameEngine
 pygame.init()
 # generate game blocks, differentiate between active and passive blocks
 gameBlocks, activeBlocks = PygameBlocksGenerator().generate()
-
-gameEngine = GameEngine(gameBlocks, PygameGraphics(gameBlocks, activeBlocks),
-                        PygamePhysics(PygameCollisionDetection(gameBlocks, activeBlocks), activeBlocks),
-                        PygameUserInput())
+player = PygamePlayer(PygamePhysics(PygameCollisionDetection()), gameBlocks)
+allBlocks = gameBlocks.copy()
+allBlocks.append(player)
+gameEngine = GameEngine(gameBlocks, PygameGraphics(allBlocks),
+                        player, PygameUserInput())
 
 run = True
 while run:

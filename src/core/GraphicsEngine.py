@@ -1,8 +1,7 @@
 class GraphicsEngine:
     gameBlocks = None
 
-    def __init__(self, gameBlocks, activeBlocks):
-        self.activeBlocks = activeBlocks
+    def __init__(self, gameBlocks):
         self.gameBlocks = gameBlocks
 
     def draw(self):

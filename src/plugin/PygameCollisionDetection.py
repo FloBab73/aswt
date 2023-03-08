@@ -1,19 +1,10 @@
 from src.core.BlockType import BlockType
 from src.core.CollisionDetection import CollisionDetection
-from src.plugin.PygameGameBlock import PygameGameBlock
 
 
 class PygameCollisionDetection(CollisionDetection):
-    gameBlocks = []
 
-    def __init__(self, gameBlocks, activeBlocks):
-        super().__init__(gameBlocks, activeBlocks)
-        gameBlocks.append(PygameGameBlock(-2, -2, 804, 2, BlockType.WALL))
-        gameBlocks.append(PygameGameBlock(800, -2, 2, 604, BlockType.WALL))
-        gameBlocks.append(PygameGameBlock(-2, 600, 804, 2, BlockType.WALL))
-        gameBlocks.append(PygameGameBlock(-2, -2, 2, 604, BlockType.WALL))
-
-    def detect(self, index, border):
+    def detect(self, subject, objects, border):
         touch = {
             "right": False,
             "left": False,
@@ -21,8 +12,7 @@ class PygameCollisionDetection(CollisionDetection):
             "top": False,
             "hasEvent": False
         }
-        subject = self.activeBlocks[index]
-        for block in self.gameBlocks:
+        for block in objects:
             if block.position().clipline(subject.x + subject.width - 1 + border,
                                          subject.y,
                                          subject.x + subject.width - 1 + border,
