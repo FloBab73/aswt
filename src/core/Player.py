@@ -2,14 +2,23 @@ from src.core.BlockType import BlockType
 from src.core.GameBlock import GameBlock
 
 
-class Player:
+class Player(GameBlock):
+    velocity_x = 0
+    velocity_y = 0
+    acceleration = 1
+    deceleration = 1
+    maxSpeed = 2
 
-    def __init__(self, x, y, w, h):
-        self.pos = GameBlock(x, y, w, h, BlockType.PLAYER)
+    def __init__(self, physicsEngine, gameBlocks, x=0, y=0, width=10, height=10):
+        self.gameBlocks = gameBlocks
+        self.physicsEngine = physicsEngine
+        self.x = x
+        self.y = y
+        super().__init__(x, y, width, height, BlockType.PLAYER)
         self._health = 100
 
-    def position(self):
-        return [self.pos.x, self.pos.y, self.pos.width, self.pos.height]
+    def movement(self, key):
+        pass
 
     def modify_health(self, modifier):
         self._health += modifier

@@ -4,18 +4,11 @@ from src.plugin.PygameGameBlock import PygameGameBlock
 
 
 class PygameCollisionDetection(CollisionDetection):
-    gameBlocks = []
-
-    def __init__(self, gameBlocks, activeBlocks, eventHandler):
-        super().__init__(gameBlocks, activeBlocks)
-        gameBlocks.append(PygameGameBlock(-2, -2, 804, 2, BlockType.WALL))
-        gameBlocks.append(PygameGameBlock(800, -2, 2, 604, BlockType.WALL))
-        gameBlocks.append(PygameGameBlock(-2, 600, 804, 2, BlockType.WALL))
-        gameBlocks.append(PygameGameBlock(-2, -2, 2, 604, BlockType.WALL))
-
+    def __init__(self, eventHandler):
         self.eventHandler = eventHandler
 
-    def detect(self, index, border):
+
+    def detect(self, subject, objects, border):
         touch = {
             "right": False,
             "left": False,
@@ -23,8 +16,7 @@ class PygameCollisionDetection(CollisionDetection):
             "top": False,
             "hasEvent": False
         }
-        subject = self.activeBlocks[index]
-        for block in self.gameBlocks:
+        for block in objects:
             if block.position().clipline(subject.x + subject.width - 1 + border,
                                          subject.y,
                                          subject.x + subject.width - 1 + border,
@@ -48,11 +40,11 @@ class PygameCollisionDetection(CollisionDetection):
 
         return touch
 
-    def checkBlock(self, touch, direction, block):
+    @staticmethod
+    def checkBlock(touch, direction, block):
         if block.blockType == BlockType.ITEM_HEAL:
             touch["hasEvent"] = True
             touch["event"] = {"type": "item", "block": block}
-            self.eventHandler(self.eventHandler.Events.Health, 25)
         else:
             touch[direction] = True
         return touch

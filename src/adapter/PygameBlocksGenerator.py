@@ -4,6 +4,7 @@ from src.core.BlockType import BlockType
 from src.core.Generator import Generator
 from src.plugin import extractor
 from src.plugin.PygameGameBlock import PygameGameBlock
+from src.plugin.PygamePlayer import PygamePlayer
 
 
 class PygameBlocksGenerator(Generator):
@@ -37,5 +38,10 @@ class PygameBlocksGenerator(Generator):
                 elif np.array_equal(array[x][y], self.PixelType.ENEMY):
                     activeBlocks.append(PygameGameBlock(y * 20 + 5, x * 20 + 5, 10, 10, BlockType.ENEMY))
                 elif np.array_equal(array[x][y], self.PixelType.PLAYER):
-                    activeBlocks.append(PygameGameBlock(y * 20 + 5, x * 20 + 5, 10, 10, BlockType.PLAYER))
+                    activeBlocks.append(PygamePlayer(y * 20 + 5, x * 20 + 5, 10, 10))
+
+        gameBlocks.append(PygameGameBlock(-2, -2, 804, 2, BlockType.WALL))
+        gameBlocks.append(PygameGameBlock(800, -2, 2, 604, BlockType.WALL))
+        gameBlocks.append(PygameGameBlock(-2, 600, 804, 2, BlockType.WALL))
+        gameBlocks.append(PygameGameBlock(-2, -2, 2, 604, BlockType.WALL))
         return gameBlocks, activeBlocks
