@@ -4,7 +4,7 @@ from src.plugin.PygameGameBlock import PygameGameBlock
 
 
 class PygamePlayer(Player, PygameGameBlock):
-    def __init__(self, physics_engine, game_blocks, x=1, y=1, width=10, height=10):
+    def __init__(self, physics_engine, game_blocks, x=0, y=0, width=10, height=10):
         Player.__init__(self, physics_engine, game_blocks, x, y, width, height)
         PygameGameBlock.__init__(self, x, y, width, height, BlockType.PLAYER)
 
