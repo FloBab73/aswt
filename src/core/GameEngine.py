@@ -12,3 +12,8 @@ class GameEngine:
         self.player.movement(key)
 
         self.graphicsEngine.draw()
+
+    def remove_block(self, x, y):
+        for block in self.gameBlocks:
+            if block.position().x == x and block.position().y == y:
+                self.gameBlocks.remove(block)

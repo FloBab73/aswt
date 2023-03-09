@@ -15,6 +15,7 @@ class EventHandler:
         Health = 0
         Item = 1
         Money = 2
+        Remove = 3
 
     def __init__(self):
         self._eventDict = {}
@@ -23,7 +24,7 @@ class EventHandler:
         if event not in self._eventDict:
             self._eventDict[event] = {func}  # new map
         else:
-            self._eventDict[event].append(func)
+            self._eventDict[event].add(func)
 
     def remove(self, event, func):
         if event in self._eventDict:

@@ -1,12 +1,10 @@
 from src.core.BlockType import BlockType
 from src.core.CollisionDetection import CollisionDetection
-from src.plugin.PygameGameBlock import PygameGameBlock
 
 
 class PygameCollisionDetection(CollisionDetection):
     def __init__(self, eventHandler):
         self.eventHandler = eventHandler
-
 
     def detect(self, subject, objects, border):
         touch = {
@@ -40,11 +38,11 @@ class PygameCollisionDetection(CollisionDetection):
 
         return touch
 
-    @staticmethod
-    def checkBlock(touch, direction, block):
+    def checkBlock(self, touch, direction, block):
         if block.blockType == BlockType.ITEM_HEAL:
-            touch["hasEvent"] = True
-            touch["event"] = {"type": "item", "block": block}
+            self.eventHandler.__call__(self.eventHandler.Events.Health, 10)
+            self.eventHandler.__call__(self.eventHandler.Events.Remove, block.position().x, block.position().y)
+
         else:
             touch[direction] = True
         return touch

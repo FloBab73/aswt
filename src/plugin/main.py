@@ -3,7 +3,6 @@ import sys
 
 import pygame
 
-
 # Für Daniel, damit es ohne pycharm funktioniert
 print("In module products sys.path[0], __package__ ==", sys.path[0], __package__)
 sys.path[0] = os.getcwd()
@@ -19,14 +18,19 @@ from src.core.GameEngine import GameEngine
 
 pygame.init()
 eventHandler = EventHandler()
+
 # generate game blocks, differentiate between active and passive blocks
-gameBlocks, activeBlocks = PygameBlocksGenerator().generate()
-player = PygamePlayer(PygamePhysics(PygameCollisionDetection()), gameBlocks)
+gameBlocks, _ = PygameBlocksGenerator().generate()
+physics = PygamePhysics(PygameCollisionDetection(eventHandler))
+player = PygamePlayer(physics, gameBlocks)
 allBlocks = gameBlocks.copy()
-allBlocks.append(player)
-gameEngine = GameEngine(gameBlocks, PygameGraphics(allBlocks),
+activeBlocks = [player]
+
+gameEngine = GameEngine(gameBlocks, PygameGraphics(gameBlocks, activeBlocks),
                         player, PygameUserInput())
+
 eventHandler.add(eventHandler.Events.Health, player.modify_health)
+eventHandler.add(eventHandler.Events.Remove, gameEngine.remove_block)
 
 run = True
 while run:

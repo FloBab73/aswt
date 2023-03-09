@@ -10,11 +10,11 @@ class Player(GameBlock):
     maxSpeed = 2
 
     def __init__(self, physicsEngine, gameBlocks, x=0, y=0, width=10, height=10):
+        super().__init__(x, y, width, height, BlockType.PLAYER)
         self.gameBlocks = gameBlocks
         self.physicsEngine = physicsEngine
         self.x = x
         self.y = y
-        super().__init__(x, y, width, height, BlockType.PLAYER)
         self._health = 100
 
     def movement(self, key):
@@ -22,9 +22,9 @@ class Player(GameBlock):
 
     def modify_health(self, modifier):
         self._health += modifier
-        print ("Player Health: ", self._health)
+        print("Player Health: ", self._health)
         if self._health <= 0:
             self.death()
 
     def death(self):
-        print ("X.X Du bist Tot X.X")
+        print("X.X Du bist Tot X.X")

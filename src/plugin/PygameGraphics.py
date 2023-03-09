@@ -7,8 +7,8 @@ from src.core.GraphicsEngine import GraphicsEngine
 class PygameGraphics(GraphicsEngine):
     screen = None
 
-    def __init__(self, gameBlocks):
-        super().__init__(gameBlocks)
+    def __init__(self, gameBlocks, activeBlocks):
+        super().__init__(gameBlocks, activeBlocks)
         self.screen = pygame.display.set_mode((800, 600))
 
     def draw(self):
@@ -23,12 +23,13 @@ class PygameGraphics(GraphicsEngine):
                 pygame.draw.rect(self.screen, (0, 200, 200), gameBlock.position())
             elif gameBlock.blockType == BlockType.DOOR:
                 pygame.draw.rect(self.screen, (64, 64, 64), gameBlock.position())
-            elif gameBlock.blockType == BlockType.PLAYER:
-                pygame.draw.rect(self.screen, (255, 255, 255), gameBlock.position())
             else:
                 pygame.draw.rect(self.screen, (100, 50, 0), gameBlock.position())
 
-            # if activeBlock.blockType == BlockType.ENEMY:
-            #    pygame.draw.rect(self.screen, (255, 0, 0), activeBlock.position())
+        for block in self.activeBlocks:
+            if block.blockType == BlockType.PLAYER:
+                pygame.draw.rect(self.screen, (255, 255, 255), block.position())
+            elif block.blockType == BlockType.ENEMY:
+                pygame.draw.rect(self.screen, (255, 0, 0), block.position())
 
         pygame.display.update()
