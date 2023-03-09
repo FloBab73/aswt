@@ -17,29 +17,29 @@ from src.adapter.PygameBlocksGenerator import PygameBlocksGenerator
 from src.core.GameEngine import GameEngine
 
 pygame.init()
-eventHandler = EventHandler()
+event_handler = EventHandler()
 
 # generate game blocks, differentiate between active and passive blocks
-gameBlocks, _ = PygameBlocksGenerator().generate()
-physics = PygamePhysics(PygameCollisionDetection(eventHandler))
-player = PygamePlayer(physics, gameBlocks)
-allBlocks = gameBlocks.copy()
-activeBlocks = [player]
+game_blocks, _ = PygameBlocksGenerator().generate()
+physics = PygamePhysics(PygameCollisionDetection(event_handler))
+player = PygamePlayer(physics, game_blocks)
+all_blocks = game_blocks.copy()
+active_blocks = [player]
 
-gameEngine = GameEngine(gameBlocks, PygameGraphics(gameBlocks, activeBlocks),
-                        player, PygameUserInput())
+game_engine = GameEngine(game_blocks, PygameGraphics(game_blocks, active_blocks),
+                         player, PygameUserInput())
 
-eventHandler.add(eventHandler.Events.Health, player.modify_health)
-eventHandler.add(eventHandler.Events.Remove, gameEngine.remove_block)
+event_handler.add(event_handler.Events.Health, player.modify_health)
+event_handler.add(event_handler.Events.Remove, game_engine.remove_block)
 
 run = True
 while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            eventHandler(event.type)
+            event_handler(event.type)
             run = False
     clock = pygame.time.Clock()
 
-    gameEngine.run()
+    game_engine.run()
 
     clock.tick(60)

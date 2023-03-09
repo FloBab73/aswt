@@ -3,8 +3,8 @@ from src.core.PhysicsEngine import PhysicsEngine
 
 class PygamePhysics(PhysicsEngine):
 
-    def __init__(self, collisionDetection):
-        super().__init__(collisionDetection)
+    def __init__(self, collision_detection):
+        super().__init__(collision_detection)
 
     # moves player one pixel at a time to stop at the right moment
     def move(self, subject, objects, distance_x, distance_y):
@@ -35,9 +35,9 @@ class PygamePhysics(PhysicsEngine):
                 y = 0
                 go_y = False
 
-            subject.moveBlock(x, y)
+            subject.move_block(x, y)
 
-            touch = self.collisionDetection.detect(subject, objects, 1)
+            touch = self.collision_detection.detect(subject, objects, 1)
 
             if touch["bottom"] or touch["top"]:
                 y = 0

@@ -9,10 +9,10 @@ class Player(GameBlock):
     deceleration = 1
     maxSpeed = 2
 
-    def __init__(self, physicsEngine, gameBlocks, x=0, y=0, width=10, height=10):
+    def __init__(self, physics_engine, game_blocks, x=0, y=0, width=10, height=10):
         super().__init__(x, y, width, height, BlockType.PLAYER)
-        self.gameBlocks = gameBlocks
-        self.physicsEngine = physicsEngine
+        self.game_blocks = game_blocks
+        self.physics_engine = physics_engine
         self.x = x
         self.y = y
         self._health = 100

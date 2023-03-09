@@ -4,7 +4,7 @@ from src.core.UserInput import UserInput
 
 
 class PygameUserInput(UserInput):
-    def getUserInput(self):
+    def get_user_input(self):
         key = {
             "up": False,
             "right": False,

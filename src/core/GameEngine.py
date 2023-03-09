@@ -1,13 +1,13 @@
 class GameEngine:
 
-    def __init__(self, gameBlocks, graphicsEngine, player, userInput):
+    def __init__(self, game_blocks, graphics_engine, player, user_input):
         self.player = player
-        self.userInput = userInput
-        self.graphicsEngine = graphicsEngine
-        self.gameBlocks = gameBlocks
+        self.userInput = user_input
+        self.graphicsEngine = graphics_engine
+        self.gameBlocks = game_blocks
 
     def run(self):
-        key = self.userInput.getUserInput()
+        key = self.userInput.get_user_input()
 
         self.player.movement(key)
 

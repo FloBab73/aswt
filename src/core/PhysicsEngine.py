@@ -4,8 +4,8 @@ class PhysicsEngine:
     deceleration = 1
     maxSpeed = 2
 
-    def __init__(self, collisionDetection):
-        self.collisionDetection = collisionDetection
+    def __init__(self, collision_detection):
+        self.collision_detection = collision_detection
 
     def movement(self, subject, objects, velocity_x, velocity_y):
         pass

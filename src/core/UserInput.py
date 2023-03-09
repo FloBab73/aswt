@@ -1,4 +1,4 @@
 class UserInput:
 
-    def getUserInput(self):
+    def get_user_input(self):
         pass

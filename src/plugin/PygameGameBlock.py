@@ -6,14 +6,14 @@ from src.core.GameBlock import GameBlock
 
 class PygameGameBlock(GameBlock):
 
-    def __init__(self, x, y, width, height, blockType=BlockType.NON):
-        super().__init__(x, y, width, height, blockType)
-        self.pygameBlock = pygame.Rect(x, y, width, height)
+    def __init__(self, x, y, width, height, block_type=BlockType.NONE):
+        super().__init__(x, y, width, height, block_type)
+        self.pygame_block = pygame.Rect(x, y, width, height)
 
     def position(self):
-        return self.pygameBlock
+        return self.pygame_block
 
-    def moveBlock(self, x, y):
-        self.pygameBlock = self.pygameBlock.move(x, y)
+    def move_block(self, x, y):
+        self.pygame_block = self.pygame_block.move(x, y)
         self.x += x
         self.y += y
