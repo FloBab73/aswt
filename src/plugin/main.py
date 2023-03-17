@@ -5,11 +5,11 @@ import sys
 print("In module products sys.path[0], __package__ ==", sys.path[0], __package__)
 sys.path[0] = os.getcwd()
 
+from src.core.CollisionDetection import CollisionDetection
+from src.core.GraphicsEngine import GraphicsEngine
+from src.core.PhysicsEngine import PhysicsEngine
+from src.core.Player import Player
 from src.adapter.PygameGameEngine import PygameGameEngine
-from src.plugin.PygamePlayer import PygamePlayer
-from src.plugin.PygameCollisionDetection import PygameCollisionDetection
-from src.plugin.PygameGraphics import PygameGraphics
-from src.plugin.PygamePhysics import PygamePhysics
 from src.plugin.EventHandler import EventHandler
 from src.adapter.PygameBlocksGenerator import PygameBlocksGenerator
 from src.core.GameLoop import GameLoop
@@ -20,12 +20,12 @@ event_handler = EventHandler()
 
 # generate game blocks, differentiate between active and passive blocks
 game_blocks, _ = PygameBlocksGenerator().generate()
-physics = PygamePhysics(PygameCollisionDetection(game_engine, event_handler))
-player = PygamePlayer(physics, game_blocks)
+physics = PhysicsEngine(CollisionDetection(game_engine, event_handler))
+player = Player(physics, game_blocks)
 all_blocks = game_blocks.copy()
 active_blocks = [player]
 
-game_loop = GameLoop(game_engine, game_blocks, PygameGraphics(game_engine, game_blocks, active_blocks),
+game_loop = GameLoop(game_engine, game_blocks, GraphicsEngine(game_engine, game_blocks, active_blocks),
                      player)
 
 event_handler.add(event_handler.Events.Health, player.modify_health)

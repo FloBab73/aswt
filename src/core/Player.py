@@ -18,7 +18,42 @@ class Player(GameBlock):
         self._health = 100
 
     def movement(self, key):
-        pass
+
+        touch = self.physics_engine.collision_detection.detect(self, self.game_blocks, 1)
+
+        if touch["bottom"]:
+            self.velocity_y = 0
+        elif touch["top"]:
+            self.velocity_y = self.physics_engine.gravity
+        else:
+            self.velocity_y += self.physics_engine.gravity
+
+        if touch["left"]:
+            if self.velocity_x < 0:
+                self.velocity_x = 0
+        else:
+            if key["left"]:
+                if self.velocity_x >= -self.maxSpeed:
+                    self.velocity_x -= self.acceleration
+            else:
+                if self.velocity_x < 0:
+                    self.velocity_x += self.deceleration
+
+        if touch["right"]:
+            if self.velocity_x > 0:
+                self.velocity_x = 0
+        else:
+            if key["right"]:
+                if self.velocity_x <= self.maxSpeed:
+                    self.velocity_x += self.acceleration
+            else:
+                if self.velocity_x > 0:
+                    self.velocity_x -= self.deceleration
+
+        if key["up"] and touch["bottom"]:
+            self.velocity_y = -9
+
+        self.physics_engine.move(self, self.game_blocks, self.velocity_x, self.velocity_y)
 
     def modify_health(self, modifier):
         self._health += modifier

@@ -3,8 +3,8 @@ import numpy as np
 from src.core.BlockType import BlockType
 from src.core.GameBlock import GameBlock
 from src.core.Generator import Generator
+from src.core.Player import Player
 from src.plugin import extractor
-from src.plugin.PygamePlayer import PygamePlayer
 
 
 class PygameBlocksGenerator(Generator):
@@ -38,7 +38,7 @@ class PygameBlocksGenerator(Generator):
                 elif np.array_equal(array[x][y], self.PixelType.ENEMY):
                     active_blocks.append(GameBlock(y * 20 + 5, x * 20 + 5, 10, 10, BlockType.ENEMY))
                 elif np.array_equal(array[x][y], self.PixelType.PLAYER):
-                    active_blocks.append(PygamePlayer(y * 20 + 5, x * 20 + 5, 10, 10))
+                    active_blocks.append(Player(y * 20 + 5, x * 20 + 5, 10, 10))
 
         game_blocks.append(GameBlock(-2, -2, 804, 2, BlockType.WALL))
         game_blocks.append(GameBlock(800, -2, 2, 604, BlockType.WALL))
