@@ -1,9 +1,9 @@
 import numpy as np
 
 from src.core.BlockType import BlockType
+from src.core.GameBlock import GameBlock
 from src.core.Generator import Generator
 from src.plugin import extractor
-from src.plugin.PygameGameBlock import PygameGameBlock
 from src.plugin.PygamePlayer import PygamePlayer
 
 
@@ -26,22 +26,22 @@ class PygameBlocksGenerator(Generator):
         for x in range(len(array)):
             for y in range(len(array[0])):
                 if np.array_equal(array[x][y], self.PixelType.WALL):
-                    game_blocks.append(PygameGameBlock(y * 20, x * 20, 20, 20, BlockType.WALL))
+                    game_blocks.append(GameBlock(y * 20, x * 20, 20, 20, BlockType.WALL))
                 elif np.array_equal(array[x][y], self.PixelType.ITEM_HEAL):
-                    game_blocks.append(PygameGameBlock(y * 20 + 5, x * 20 + 5, 10, 10, BlockType.ITEM_HEAL))
+                    game_blocks.append(GameBlock(y * 20 + 5, x * 20 + 5, 10, 10, BlockType.ITEM_HEAL))
                 elif np.array_equal(array[x][y], self.PixelType.ITEM_KEY):
-                    game_blocks.append(PygameGameBlock(y * 20 + 5, x * 20 + 5, 10, 10, BlockType.ITEM_KEY))
+                    game_blocks.append(GameBlock(y * 20 + 5, x * 20 + 5, 10, 10, BlockType.ITEM_KEY))
                 elif np.array_equal(array[x][y], self.PixelType.ITEM_KEY):
-                    game_blocks.append(PygameGameBlock(y * 20 + 5, x * 20 + 5, 10, 10, BlockType.ITEM_VALUABLE))
+                    game_blocks.append(GameBlock(y * 20 + 5, x * 20 + 5, 10, 10, BlockType.ITEM_VALUABLE))
                 elif np.array_equal(array[x][y], self.PixelType.DOOR):
-                    game_blocks.append(PygameGameBlock(y * 20, x * 20 - 20, 20, 40, BlockType.DOOR))
+                    game_blocks.append(GameBlock(y * 20, x * 20 - 20, 20, 40, BlockType.DOOR))
                 elif np.array_equal(array[x][y], self.PixelType.ENEMY):
-                    active_blocks.append(PygameGameBlock(y * 20 + 5, x * 20 + 5, 10, 10, BlockType.ENEMY))
+                    active_blocks.append(GameBlock(y * 20 + 5, x * 20 + 5, 10, 10, BlockType.ENEMY))
                 elif np.array_equal(array[x][y], self.PixelType.PLAYER):
                     active_blocks.append(PygamePlayer(y * 20 + 5, x * 20 + 5, 10, 10))
 
-        game_blocks.append(PygameGameBlock(-2, -2, 804, 2, BlockType.WALL))
-        game_blocks.append(PygameGameBlock(800, -2, 2, 604, BlockType.WALL))
-        game_blocks.append(PygameGameBlock(-2, 600, 804, 2, BlockType.WALL))
-        game_blocks.append(PygameGameBlock(-2, -2, 2, 604, BlockType.WALL))
+        game_blocks.append(GameBlock(-2, -2, 804, 2, BlockType.WALL))
+        game_blocks.append(GameBlock(800, -2, 2, 604, BlockType.WALL))
+        game_blocks.append(GameBlock(-2, 600, 804, 2, BlockType.WALL))
+        game_blocks.append(GameBlock(-2, -2, 2, 604, BlockType.WALL))
         return game_blocks, active_blocks

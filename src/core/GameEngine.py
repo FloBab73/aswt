@@ -1,19 +1,35 @@
+import pygame.event
+
+
 class GameEngine:
 
-    def __init__(self, game_blocks, graphics_engine, player, user_input):
-        self.player = player
-        self.userInput = user_input
-        self.graphicsEngine = graphics_engine
-        self.gameBlocks = game_blocks
+    def __init__(self):
+        pass
 
-    def run(self):
-        key = self.userInput.get_user_input()
+    def get_events(self):
+        events = []
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                events.append("QUIT")
+        return events
 
-        self.player.movement(key)
+    def tick_clock(self, framerate):
+        pass
 
-        self.graphicsEngine.draw()
+    def get_user_input(self):
+        pass
 
-    def remove_block(self, x, y):
-        for block in self.gameBlocks:
-            if block.position().x == x and block.position().y == y:
-                self.gameBlocks.remove(block)
+    def clipline(self, block, x_1, y_1, x_2, y_2):
+        pass
+
+    def init_display(self, width, height):
+        pass
+
+    def screen_fill(self, screen, color):
+        pass
+
+    def draw_rect(self, surface, color, position):
+        pass
+
+    def update_display(self):
+        pass

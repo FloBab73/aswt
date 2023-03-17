@@ -35,7 +35,7 @@ class PygamePhysics(PhysicsEngine):
                 y = 0
                 go_y = False
 
-            subject.move_block(x, y)
+            subject.move(x, y)
 
             touch = self.collision_detection.detect(subject, objects, 1)
 

@@ -11,3 +11,7 @@ class GameBlock:
 
     def position(self):
         return [self.x, self.y, self.width, self.height]
+
+    def move(self, x, y):
+        self.x += x
+        self.y += y
