@@ -19,7 +19,7 @@ class GameEngine:
     def get_user_input(self):
         pass
 
-    def clipline(self, block, x_1, y_1, x_2, y_2):
+    def clipline(self, block, x1, y1, x2, y2):
         pass
 
     def init_display(self, width, height):

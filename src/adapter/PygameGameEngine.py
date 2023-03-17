@@ -35,7 +35,7 @@ class PygameGameEngine(GameEngine):
 
     def clipline(self, block, x1, y1, x2, y2):
         pygame_block = pygame.Rect(block.position())
-        return pygame_block.clipline(x1, y2, x2, y2)
+        return pygame_block.clipline(x1, y1, x2, y2)
 
     def init_display(self, width, height):
         return pygame.display.set_mode((width, height))
