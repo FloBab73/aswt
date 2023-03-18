@@ -7,9 +7,18 @@ class GraphicsEngine:
         self.gameEngine = gameEngine
         self.game_blocks = game_blocks
         self.activeBlocks = active_blocks
-        self.screen = gameEngine.init_display(800, 600)
+        self.screen = gameEngine.init_display(800, 630)
+        self.pause = False
 
     def draw(self):
+        if self.pause:
+            self.draw_menue()
+        else:
+            self.draw_level()
+            self.draw_hud()
+        self.gameEngine.update_display()
+
+    def draw_level(self):
         self.gameEngine.screen_fill(self.screen, [200, 150, 0])
 
         for block in self.game_blocks:
@@ -30,4 +39,10 @@ class GraphicsEngine:
             elif block.block_type == BlockType.ENEMY:
                 self.gameEngine.draw_rect(self.screen, (255, 0, 0), block.position())
 
-        self.gameEngine.update_display()
+    def draw_menue(self):
+        pass
+
+    def draw_hud(self):
+        self.gameEngine.draw_rect(self.screen, [20, 20, 20], [0, 600, 800, 30])
+        self.gameEngine.draw_text(self.screen, "Health: " + str(self.activeBlocks[0].health), [5, 610])
+        self.gameEngine.draw_text(self.screen, "Keys: 0", [700, 610])

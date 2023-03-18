@@ -10,6 +10,7 @@ class PygameGameEngine(GameEngine):
         pygame.init()
         self.clock = pygame.time.Clock()
         self.event_handler = event_handler
+        self.font = pygame.font.SysFont(None, 24)
 
     def tick_clock(self, framerate):
         self.clock.tick(framerate)
@@ -17,9 +18,10 @@ class PygameGameEngine(GameEngine):
     def fetch_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.event_handler(self.event_handler.events.Quit)
+                self.event_handler(self.event_handler.Events.Quit)
 
     def get_user_input(self):
+        #TODO replace Key with list
         key = {
             "up": False,
             "right": False,
@@ -60,3 +62,7 @@ class PygameGameEngine(GameEngine):
 
     def update_display(self):
         pygame.display.update()
+
+    def draw_text(self, screen,  text, position):
+        img = self.font.render(text, True, [200, 200, 200])
+        screen.blit(img, position)
