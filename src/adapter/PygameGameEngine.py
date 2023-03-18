@@ -10,7 +10,7 @@ class PygameGameEngine(GameEngine):
         pygame.init()
         self.clock = pygame.time.Clock()
         self.event_handler = event_handler
-        self.font = pygame.font.SysFont(None, 24)
+        self.font = pygame.font.SysFont(None, 30)
 
     def tick_clock(self, framerate):
         self.clock.tick(framerate)
