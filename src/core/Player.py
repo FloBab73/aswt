@@ -59,7 +59,6 @@ class Player(GameBlock):
 
     def modify_health(self, modifier):
         self._health += modifier
-        print("Player Health: ", self._health)
         if self._health <= 0:
             self.death()
 
@@ -70,3 +69,7 @@ class Player(GameBlock):
         self.x = self._startX
         self.y = self._startY
         self._health = 100
+
+    @property
+    def health(self):
+        return self._health
