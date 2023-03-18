@@ -18,6 +18,7 @@ class Player(GameBlock):
         self.y = y
         self._startY = y
         self._health = 100
+        self._keys = 0
 
     def movement(self, key):
 
@@ -73,3 +74,10 @@ class Player(GameBlock):
     @property
     def health(self):
         return self._health
+
+    @property
+    def keys(self):
+        return self._keys
+
+    def find_key(self):
+        self._keys += 1

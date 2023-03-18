@@ -46,6 +46,9 @@ class CollisionDetection:
         if block.block_type == BlockType.ITEM_HEAL:
             self.event_handler.__call__(self.event_handler.Events.Health, 10)
             self.event_handler.__call__(self.event_handler.Events.Remove, block.x, block.y)
+        if block.block_type == BlockType.ITEM_KEY:
+            self.event_handler.__call__(self.event_handler.Events.Key)
+            self.event_handler.__call__(self.event_handler.Events.Remove, block.x, block.y)
 
         else:
             touch[direction] = True

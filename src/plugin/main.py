@@ -31,6 +31,7 @@ game_loop = GameLoop(
                      player)
 
 event_handler.add(event_handler.Events.Health, player.modify_health)
+event_handler.add(event_handler.Events.Key, player.find_key)
 event_handler.add(event_handler.Events.Remove, game_loop.remove_block)
 
 while game_loop.is_running:

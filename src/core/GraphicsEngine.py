@@ -44,5 +44,5 @@ class GraphicsEngine:
 
     def draw_hud(self):
         self.gameEngine.draw_rect(self.screen, [20, 20, 20], [0, 600, 800, 30])
-        self.gameEngine.draw_text(self.screen, "Health: " + str(self.activeBlocks[0].health), [5, 610])
-        self.gameEngine.draw_text(self.screen, "Keys: 0", [700, 610])
+        self.gameEngine.draw_text(self.screen, "Health: " + str(self.activeBlocks[0].health), [5, 605])
+        self.gameEngine.draw_text(self.screen, "Keys: " + str(self.activeBlocks[0].keys), [150, 605])
