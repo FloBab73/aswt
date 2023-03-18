@@ -14,7 +14,9 @@ class Player(GameBlock):
         self.game_blocks = game_blocks
         self.physics_engine = physics_engine
         self.x = x
+        self._startX = x
         self.y = y
+        self._startY = y
         self._health = 100
 
     def movement(self, key):
@@ -63,3 +65,8 @@ class Player(GameBlock):
 
     def death(self):
         print("X.X Du bist Tot X.X")
+
+    def resetPos(self):
+        self.x = self._startX
+        self.y = self._startY
+        self._health = 100

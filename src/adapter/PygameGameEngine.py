@@ -5,13 +5,19 @@ from src.core.GameEngine import GameEngine
 
 class PygameGameEngine(GameEngine):
 
-    def __init__(self):
+    def __init__(self, event_handler):
         super().__init__()
         pygame.init()
         self.clock = pygame.time.Clock()
+        self.event_handler = event_handler
 
     def tick_clock(self, framerate):
         self.clock.tick(framerate)
+
+    def fetch_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.event_handler(self.event_handler.events.Quit)
 
     def get_user_input(self):
         key = {
@@ -19,6 +25,8 @@ class PygameGameEngine(GameEngine):
             "right": False,
             "left": False,
             "bottom": False,
+            "r": False,
+            "esc": False,
         }
         pygame_key = pygame.key.get_pressed()
 
@@ -30,6 +38,10 @@ class PygameGameEngine(GameEngine):
             key["down"] = True
         if pygame_key[pygame.K_LEFT]:
             key["left"] = True
+        if pygame_key[pygame.K_r]:
+            key["r"] = True
+        if pygame_key[pygame.K_ESCAPE]:
+            key["esc"] = True
 
         return key
 

@@ -16,6 +16,7 @@ class EventHandler:
         Item = 1
         Money = 2
         Remove = 3
+        Quit = 255
 
     def __init__(self):
         self._eventDict = {}

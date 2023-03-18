@@ -5,13 +5,15 @@ class GameEngine:
 
     def __init__(self):
         pass
-
     def get_events(self):
         events = []
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 events.append("QUIT")
         return events
+
+    def fetch_events(self):
+        pass
 
     def tick_clock(self, framerate):
         pass
