@@ -16,6 +16,7 @@ class EventHandler:
         Key = 1
         Money = 2
         Remove = 3
+        Door = 4
         Quit = 255
 
     def __init__(self):

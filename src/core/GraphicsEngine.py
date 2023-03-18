@@ -3,16 +3,16 @@ from src.core.BlockType import BlockType
 
 class GraphicsEngine:
 
-    def __init__(self, gameEngine, game_blocks, active_blocks):
-        self.gameEngine = gameEngine
+    def __init__(self, game_engine, game_blocks, active_blocks):
+        self.gameEngine = game_engine
         self.game_blocks = game_blocks
         self.activeBlocks = active_blocks
-        self.screen = gameEngine.init_display(800, 630)
+        self.screen = game_engine.init_display(800, 630)
         self.pause = False
 
     def draw(self):
         if self.pause:
-            self.draw_menue()
+            self.draw_menu()
         else:
             self.draw_level()
             self.draw_hud()
@@ -39,8 +39,9 @@ class GraphicsEngine:
             elif block.block_type == BlockType.ENEMY:
                 self.gameEngine.draw_rect(self.screen, (255, 0, 0), block.position())
 
-    def draw_menue(self):
-        pass
+    def draw_menu(self):
+        self.gameEngine.screen_fill(self.screen, [20, 20, 20])
+        self.gameEngine.draw_text(self.screen, "Menu", [390, 100])
 
     def draw_hud(self):
         self.gameEngine.draw_rect(self.screen, [20, 20, 20], [0, 600, 800, 30])

@@ -33,6 +33,7 @@ game_loop = GameLoop(
 event_handler.add(event_handler.Events.Health, player.modify_health)
 event_handler.add(event_handler.Events.Key, player.find_key)
 event_handler.add(event_handler.Events.Remove, game_loop.remove_block)
+event_handler.add(event_handler.Events.Door, game_loop.try_open_door)
 
 while game_loop.is_running:
     game_loop.run()
