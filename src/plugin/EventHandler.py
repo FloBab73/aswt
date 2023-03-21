@@ -13,9 +13,11 @@ from enum import Enum
 class EventHandler:
     class Events(Enum):
         Health = 0
-        Item = 1
+        Key = 1
         Money = 2
         Remove = 3
+        Door = 4
+        Quit = 255
 
     def __init__(self):
         self._eventDict = {}

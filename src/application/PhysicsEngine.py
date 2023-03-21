@@ -1,10 +1,11 @@
-from src.core.PhysicsEngine import PhysicsEngine
-
-
-class PygamePhysics(PhysicsEngine):
+class PhysicsEngine:
+    gravity = 1
+    acceleration = 1
+    deceleration = 1
+    maxSpeed = 2
 
     def __init__(self, collision_detection):
-        super().__init__(collision_detection)
+        self.collision_detection = collision_detection
 
     # moves player one pixel at a time to stop at the right moment
     def move(self, subject, objects, distance_x, distance_y):
@@ -35,7 +36,7 @@ class PygamePhysics(PhysicsEngine):
                 y = 0
                 go_y = False
 
-            subject.move_block(x, y)
+            subject.move(x, y)
 
             touch = self.collision_detection.detect(subject, objects, 1)
 
