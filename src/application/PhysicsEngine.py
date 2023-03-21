@@ -1,10 +1,8 @@
 class PhysicsEngine:
     gravity = 1
-    acceleration = 1
-    deceleration = 1
-    maxSpeed = 2
 
-    def __init__(self, collision_detection):
+    def __init__(self, collision_detection, level):
+        self.level = level
         self.collision_detection = collision_detection
 
     # moves player one pixel at a time to stop at the right moment
@@ -44,3 +42,67 @@ class PhysicsEngine:
                 y = 0
             if touch["left"] or touch["right"]:
                 x = 0
+
+    def move_player(self, key_left, key_up, key_right):
+
+        touch = self.collision_detection.detect(self.level.player, self.level.static_blocks, 1)
+        self.collision_detection.detect(self.level.player, self.level.enemies, 1)
+
+        if touch["bottom"]:
+            self.level.player.velocity_y = 0
+        elif touch["top"]:
+            self.level.player.velocity_y = self.gravity
+        else:
+            self.level.player.velocity_y += self.gravity
+
+        if touch["left"]:
+            if self.level.player.velocity_x < 0:
+                self.level.player.velocity_x = 0
+        else:
+            if key_left:
+                if self.level.player.velocity_x >= -self.level.player.maxSpeed:
+                    self.level.player.velocity_x -= self.level.player.acceleration
+            else:
+                if self.level.player.velocity_x < 0:
+                    self.level.player.velocity_x += self.level.player.deceleration
+
+        if touch["right"]:
+            if self.level.player.velocity_x > 0:
+                self.level.player.velocity_x = 0
+        else:
+            if key_right:
+                if self.level.player.velocity_x <= self.level.player.maxSpeed:
+                    self.level.player.velocity_x += self.level.player.acceleration
+            else:
+                if self.level.player.velocity_x > 0:
+                    self.level.player.velocity_x -= self.level.player.deceleration
+
+        if key_up and touch["bottom"]:
+            self.level.player.velocity_y = -9
+
+        self.move(self.level.player, self.level.static_blocks, self.level.player.velocity_x,
+                  self.level.player.velocity_y)
+
+    def move_enemies(self):
+        for enemy in self.level.enemies:
+
+            touch = self.collision_detection.detect(enemy, self.level.static_blocks, 1)
+
+            if touch["bottom"]:
+                enemy.velocity_y = 0
+            elif touch["top"]:
+                enemy.velocity_y = self.gravity
+            else:
+                enemy.velocity_y += self.gravity
+
+            if touch["left"]:
+                enemy.velocity_x = enemy.acceleration
+            elif touch["right"]:
+                enemy.velocity_x = -enemy.acceleration
+            else:
+                if 0 > enemy.velocity_x > -enemy.maxSpeed:
+                    enemy.velocity_x -= enemy.acceleration
+                elif 0 <= enemy.velocity_x < enemy.maxSpeed:
+                    enemy.velocity_x += enemy.acceleration
+
+            self.move(enemy, self.level.static_blocks, enemy.velocity_x, enemy.velocity_y)

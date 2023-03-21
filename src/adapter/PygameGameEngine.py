@@ -18,34 +18,32 @@ class PygameGameEngine(GameEngine):
     def fetch_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.event_handler(self.event_handler.Events.Quit)
+                self.event_handler(self.event_handler.Events.QUIT)
 
     def get_user_input(self):
-        #TODO replace Key with list
-        key = {
-            "up": False,
-            "right": False,
-            "left": False,
-            "bottom": False,
-            "r": False,
-            "esc": False,
-        }
+        up = False
+        right = False
+        left = False
+        down = False
+        esc = False
+
         pygame_key = pygame.key.get_pressed()
 
         if pygame_key[pygame.K_UP]:
-            key["up"] = True
+            up = True
         if pygame_key[pygame.K_RIGHT]:
-            key["right"] = True
+            right = True
         if pygame_key[pygame.K_DOWN]:
-            key["down"] = True
+            down = True
         if pygame_key[pygame.K_LEFT]:
-            key["left"] = True
+            left = True
         if pygame_key[pygame.K_r]:
-            key["r"] = True
+            self.event_handler(self.event_handler.Events.RESET)
         if pygame_key[pygame.K_ESCAPE]:
-            key["esc"] = True
+            self.event_handler(self.event_handler.Events.QUIT)
 
-        return key
+        self.event_handler(self.event_handler.Events.MOVE_PLAYER, left, up, right)
+        # self.event_handler(self.event_handler.Events.KEY_PRESSED, up, right, down, left)
 
     def clipline(self, block, x1, y1, x2, y2):
         pygame_block = pygame.Rect(block.position())
@@ -60,9 +58,9 @@ class PygameGameEngine(GameEngine):
     def draw_rect(self, surface, color, position):
         pygame.draw.rect(surface, color, position)
 
-    def update_display(self):
-        pygame.display.update()
-
-    def draw_text(self, screen,  text, position):
+    def draw_text(self, screen, text, position):
         img = self.font.render(text, True, [200, 200, 200])
         screen.blit(img, position)
+
+    def update_display(self):
+        pygame.display.update()

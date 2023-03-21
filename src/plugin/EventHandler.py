@@ -12,12 +12,19 @@ from enum import Enum
 
 class EventHandler:
     class Events(Enum):
-        Health = 0
-        Key = 1
-        Money = 2
-        Remove = 3
-        Door = 4
-        Quit = 255
+        PICKUP_HEALTH = 0
+        PICKUP_KEY = 1
+        MONEY = 2
+        REMOVE_BLOCK = 3
+        DOOR = 4
+        MOVE_PLAYER = 5
+        MOVE_ENEMIES = 6
+        DRAW = 7
+        RESET = 8
+        PAUSE = 9
+        KEY_PRESSED = 10
+        DAMAGE = 11
+        QUIT = 255
 
     def __init__(self):
         self._eventDict = {}

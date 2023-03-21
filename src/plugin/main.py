@@ -1,6 +1,8 @@
 import os
 import sys
 
+from src.domain.Level import Level
+
 # Für Daniel, damit es ohne pycharm funktioniert
 print("In module products sys.path[0], __package__ ==", sys.path[0], __package__)
 sys.path[0] = os.getcwd()
@@ -8,7 +10,6 @@ sys.path[0] = os.getcwd()
 from src.application.CollisionDetection import CollisionDetection
 from src.application.GraphicsEngine import GraphicsEngine
 from src.application.PhysicsEngine import PhysicsEngine
-from src.domain.Player import Player
 from src.adapter.PygameGameEngine import PygameGameEngine
 from src.plugin.EventHandler import EventHandler
 from src.adapter.PygameBlocksGenerator import PygameBlocksGenerator
@@ -17,23 +18,18 @@ from src.application.GameLoop import GameLoop
 event_handler = EventHandler()
 game_engine = PygameGameEngine(event_handler)
 
-# generate game blocks, differentiate between active and passive blocks
-game_blocks, _ = PygameBlocksGenerator().generate()
-physics = PhysicsEngine(CollisionDetection(game_engine, event_handler))
-player = Player(physics, game_blocks)
-all_blocks = game_blocks.copy()
-active_blocks = [player]
+static_blocks, enemies, player = PygameBlocksGenerator().generate()
+level = Level(event_handler, static_blocks, enemies, player)
 
-game_loop = GameLoop(
-                     game_engine,
-                     game_blocks,
-                     GraphicsEngine(game_engine, game_blocks, active_blocks),
-                     player)
+physics = PhysicsEngine(CollisionDetection(game_engine, event_handler), level)
+event_handler.add(event_handler.Events.MOVE_PLAYER, physics.move_player)
+event_handler.add(event_handler.Events.MOVE_ENEMIES, physics.move_enemies)
 
-event_handler.add(event_handler.Events.Health, player.modify_health)
-event_handler.add(event_handler.Events.Key, player.find_key)
-event_handler.add(event_handler.Events.Remove, game_loop.remove_block)
-event_handler.add(event_handler.Events.Door, game_loop.try_open_door)
+graphics = GraphicsEngine(game_engine, level)
+event_handler.add(event_handler.Events.DRAW, graphics.draw)
+
+game_loop = GameLoop(game_engine, event_handler)
+event_handler.add(event_handler.Events.QUIT, game_loop.quit)
 
 while game_loop.is_running:
     game_loop.run()

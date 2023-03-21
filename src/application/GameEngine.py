@@ -33,5 +33,8 @@ class GameEngine:
     def draw_rect(self, surface, color, position):
         pass
 
+    def draw_text(self, screen, text, position):
+        pass
+
     def update_display(self):
         pass
