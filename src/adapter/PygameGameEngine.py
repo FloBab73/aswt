@@ -1,6 +1,6 @@
 import pygame
 
-from src.core.GameEngine import GameEngine
+from src.application.GameEngine import GameEngine
 
 
 class PygameGameEngine(GameEngine):

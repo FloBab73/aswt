@@ -1,10 +1,10 @@
 from unittest import TestCase
 
 from src.adapter.PygameGameEngine import PygameGameEngine
-from src.core.CollisionDetection import CollisionDetection
-from src.core.GameBlock import GameBlock
-from src.core.PhysicsEngine import PhysicsEngine
-from src.core.Player import Player
+from src.application.CollisionDetection import CollisionDetection
+from src.application.PhysicsEngine import PhysicsEngine
+from src.domain.GameBlock import GameBlock
+from src.domain.Player import Player
 from src.plugin.EventHandler import EventHandler
 
 
@@ -12,7 +12,7 @@ class TestPlayer(TestCase):
 
     def test_gravity_and_stop(self):
         event_handler = EventHandler()
-        game_engine = PygameGameEngine()
+        game_engine = PygameGameEngine(event_handler)
 
         objects = [GameBlock(0, 17, 20, 20)]
         player = Player(PhysicsEngine(CollisionDetection(game_engine, event_handler)), objects)
@@ -34,7 +34,7 @@ class TestPlayer(TestCase):
 
     def test_jump(self):
         event_handler = EventHandler()
-        game_engine = PygameGameEngine()
+        game_engine = PygameGameEngine(event_handler)
 
         objects = [GameBlock(0, 30, 20, 20), GameBlock(0, -5, 20, 5)]
         player = Player(PhysicsEngine(CollisionDetection(game_engine, event_handler)), objects, 0, 20)

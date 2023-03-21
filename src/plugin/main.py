@@ -5,14 +5,14 @@ import sys
 print("In module products sys.path[0], __package__ ==", sys.path[0], __package__)
 sys.path[0] = os.getcwd()
 
-from src.core.CollisionDetection import CollisionDetection
-from src.core.GraphicsEngine import GraphicsEngine
-from src.core.PhysicsEngine import PhysicsEngine
-from src.core.Player import Player
+from src.application.CollisionDetection import CollisionDetection
+from src.application.GraphicsEngine import GraphicsEngine
+from src.application.PhysicsEngine import PhysicsEngine
+from src.domain.Player import Player
 from src.adapter.PygameGameEngine import PygameGameEngine
 from src.plugin.EventHandler import EventHandler
 from src.adapter.PygameBlocksGenerator import PygameBlocksGenerator
-from src.core.GameLoop import GameLoop
+from src.application.GameLoop import GameLoop
 
 event_handler = EventHandler()
 game_engine = PygameGameEngine(event_handler)

@@ -1,5 +1,5 @@
-from src.core.BlockType import BlockType
-from src.core.GameBlock import GameBlock
+from src.domain.BlockType import BlockType
+from src.domain.GameBlock import GameBlock
 
 
 class Player(GameBlock):

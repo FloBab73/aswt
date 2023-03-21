@@ -1,9 +1,9 @@
 import numpy as np
 
-from src.core.BlockType import BlockType
-from src.core.GameBlock import GameBlock
-from src.core.Generator import Generator
-from src.core.Player import Player
+from src.application.Generator import Generator
+from src.domain.BlockType import BlockType
+from src.domain.GameBlock import GameBlock
+from src.domain.Player import Player
 from src.plugin import extractor
 
 

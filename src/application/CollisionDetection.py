@@ -1,4 +1,4 @@
-from src.core.BlockType import BlockType
+from src.domain.BlockType import BlockType
 
 
 class CollisionDetection:
