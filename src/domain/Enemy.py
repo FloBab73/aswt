@@ -4,8 +4,9 @@ from src.domain.MovingGameBlock import MovingGameBlock
 
 class Enemy(MovingGameBlock):
 
-    def __init__(self, x=0, y=0, width=10, height=10):
+    def __init__(self, x=0, y=0, width=10, height=10, max_speed=1):
         super().__init__(x, y, width, height, BlockType.ENEMY)
+        self.max_speed = max_speed
         self.x = x
         self._startX = x
         self.y = y

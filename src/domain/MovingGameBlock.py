@@ -4,7 +4,7 @@ from src.domain.GameBlock import GameBlock
 class MovingGameBlock(GameBlock):
     acceleration = 1
     deceleration = 1
-    maxSpeed = 2
+    max_speed = 2
     velocity_x = 0
     velocity_y = 0
 

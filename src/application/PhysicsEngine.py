@@ -60,7 +60,7 @@ class PhysicsEngine:
                 self.level.player.velocity_x = 0
         else:
             if key_left:
-                if self.level.player.velocity_x >= -self.level.player.maxSpeed:
+                if self.level.player.velocity_x >= -self.level.player.max_speed:
                     self.level.player.velocity_x -= self.level.player.acceleration
             else:
                 if self.level.player.velocity_x < 0:
@@ -71,7 +71,7 @@ class PhysicsEngine:
                 self.level.player.velocity_x = 0
         else:
             if key_right:
-                if self.level.player.velocity_x <= self.level.player.maxSpeed:
+                if self.level.player.velocity_x <= self.level.player.max_speed:
                     self.level.player.velocity_x += self.level.player.acceleration
             else:
                 if self.level.player.velocity_x > 0:
@@ -100,9 +100,9 @@ class PhysicsEngine:
             elif touch["right"]:
                 enemy.velocity_x = -enemy.acceleration
             else:
-                if 0 > enemy.velocity_x > -enemy.maxSpeed:
+                if 0 > enemy.velocity_x > -enemy.max_speed:
                     enemy.velocity_x -= enemy.acceleration
-                elif 0 <= enemy.velocity_x < enemy.maxSpeed:
+                elif 0 <= enemy.velocity_x < enemy.max_speed:
                     enemy.velocity_x += enemy.acceleration
 
             self.move(enemy, self.level.static_blocks, enemy.velocity_x, enemy.velocity_y)

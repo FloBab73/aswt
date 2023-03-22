@@ -6,6 +6,7 @@ class Player(MovingGameBlock):
 
     def __init__(self, x=0, y=0, width=10, height=10):
         super().__init__(x, y, width, height, BlockType.PLAYER)
+        self.event_handler = None
         self.x = x
         self._startX = x
         self.y = y
@@ -13,12 +14,16 @@ class Player(MovingGameBlock):
         self._health = 100
         self._keys = 0
 
+    def add_event_handler(self, event_handler):
+        self.event_handler = event_handler
+
     def modify_health(self, modifier):
         self._health += modifier
         if self._health <= 0:
             self.death()
 
     def death(self):
+        self.event_handler(self.event_handler.Events.DEATH)
         print("X.X Du bist Tot X.X")
 
     def resetPos(self):

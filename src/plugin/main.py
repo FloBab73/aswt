@@ -19,6 +19,7 @@ event_handler = EventHandler()
 game_engine = PygameGameEngine(event_handler)
 
 static_blocks, enemies, player = PygameBlocksGenerator().generate()
+player.add_event_handler(event_handler)
 level = Level(event_handler, static_blocks, enemies, player)
 
 physics = PhysicsEngine(CollisionDetection(game_engine, event_handler), level)
@@ -30,6 +31,7 @@ event_handler.add(event_handler.Events.DRAW, graphics.draw)
 
 game_loop = GameLoop(game_engine, event_handler)
 event_handler.add(event_handler.Events.QUIT, game_loop.quit)
+event_handler.add(event_handler.Events.DEATH, game_loop.quit)
 
 while game_loop.is_running:
     game_loop.run()
