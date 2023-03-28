@@ -12,13 +12,13 @@ from src.application.GraphicsEngine import GraphicsEngine
 from src.application.PhysicsEngine import PhysicsEngine
 from src.adapter.PygameGameEngine import PygameGameEngine
 from src.plugin.EventHandler import EventHandler
-from src.adapter.PygameBlocksGenerator import PygameBlocksGenerator
+from src.adapter.BlocksGenerator import BlocksGenerator
 from src.application.GameLoop import GameLoop
 
 event_handler = EventHandler()
 game_engine = PygameGameEngine(event_handler)
 
-static_blocks, enemies, player = PygameBlocksGenerator().generate()
+static_blocks, enemies, player = BlocksGenerator().generate()
 player.add_event_handler(event_handler)
 level = Level(event_handler, static_blocks, enemies, player)
 

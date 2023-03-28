@@ -8,7 +8,7 @@ from src.domain.Player import Player
 from src.plugin import extractor
 
 
-class PygameBlocksGenerator(Generator):
+class BlocksGenerator(Generator):
     class PixelType:
         WALL = [0, 0, 0]
         ITEM_HEAL = [255, 216, 0]
