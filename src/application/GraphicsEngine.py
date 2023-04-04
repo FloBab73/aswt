@@ -19,9 +19,8 @@ class GraphicsEngine:
 
     def draw_level(self):
         self.gameEngine.screen_fill(self.screen, [200, 150, 0])
-        all_blocks = self.level.static_blocks + self.level.enemies + [self.level.player]
 
-        for block in all_blocks:
+        for block in self.level.all_blocks:
             match block.block_type:
                 case BlockType.ITEM_HEAL:
                     self.gameEngine.draw_rect(self.screen, (100, 255, 0), block.position())

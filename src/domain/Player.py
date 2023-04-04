@@ -1,3 +1,4 @@
+from src.application.CollisionDetection import Direction
 from src.domain.BlockType import BlockType
 from src.domain.MovingGameBlock import MovingGameBlock
 
@@ -21,6 +22,22 @@ class Player(MovingGameBlock):
         self._health += modifier
         if self._health <= 0:
             self.death()
+
+    def touch_block(self, block, direction):
+        match block.block_type:
+            case BlockType.ENEMY:
+                if direction == Direction.BOTTOM:
+                    self.event_handler(self.event_handler.Events.KILL_ENEMY, block.x, block.y)
+                else:
+                    self.modify_health(-1)
+            case BlockType.ITEM_HEAL:
+                self.modify_health(10)
+                self.event_handler(self.event_handler.Events.REMOVE_BLOCK, block.x, block.y)
+            case BlockType.ITEM_KEY:
+                self._keys += 1
+                self.event_handler(self.event_handler.Events.REMOVE_BLOCK, block.x, block.y)
+            case BlockType.DOOR:
+                self.event_handler(self.event_handler.Events.DOOR)
 
     def death(self):
         self.event_handler(self.event_handler.Events.DEATH)

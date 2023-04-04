@@ -8,7 +8,6 @@ class GameLoop:
 
     def run(self):
         self.game_engine.get_user_input()
-
         self.event_handler(self.event_handler.Events.MOVE_ENEMIES)
         self.event_handler(self.event_handler.Events.DRAW)
 

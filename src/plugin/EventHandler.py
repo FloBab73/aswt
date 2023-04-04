@@ -25,6 +25,7 @@ class EventHandler:
         KEY_PRESSED = 10
         DAMAGE = 11
         DEATH = 12
+        KILL_ENEMY = 13
         QUIT = 255
 
     def __init__(self):

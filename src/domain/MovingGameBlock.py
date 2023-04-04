@@ -14,3 +14,6 @@ class MovingGameBlock(GameBlock):
     def move(self, x, y):
         self.x += x
         self.y += y
+
+    def touch_block(self, block_type, direction):
+        pass
