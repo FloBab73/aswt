@@ -48,10 +48,17 @@ class PhysicsEngine:
 
     def move_player(self, key_left, key_up, key_right):
 
+        if self.level.player.stun:
+            key_left = False
+            key_up = False
+            key_right = False
+            self.level.player.stun -= 1
+
         touch = self.collision_detection.detect(self.level.player, self.level.blocks_without_player, 1)
 
         if Direction.BOTTOM in touch:
-            self.level.player.velocity_y = 0
+            if self.level.player.velocity_y > 0:
+                self.level.player.velocity_y = 0
         elif Direction.TOP in touch:
             self.level.player.velocity_y = self.gravity
         else:
