@@ -26,6 +26,10 @@ class EventHandler:
         DAMAGE = 11
         DEATH = 12
         KILL_ENEMY = 13
+        KEY_DOWN = 14
+        KEY_UP = 15
+        KEY_ENTER = 16
+        KEY_ESC = 17
         QUIT = 255
 
     def __init__(self):
@@ -45,7 +49,6 @@ class EventHandler:
 
     def __call__(self, event, *args, **kwargs):
         if event in self._eventDict:
-            for func in self._eventDict[event]:
+            functions = self._eventDict[event].copy()
+            for func in functions:
                 func(*args, **kwargs)
-        else:
-            print("EventHandler(): event '", event, "' not in _events")

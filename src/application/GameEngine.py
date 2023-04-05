@@ -36,5 +36,8 @@ class GameEngine:
     def draw_text(self, screen, text, position):
         pass
 
+    def draw_button(self, screen, color, position, text):
+        pass
+
     def update_display(self):
         pass

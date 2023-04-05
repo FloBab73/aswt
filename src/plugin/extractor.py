@@ -2,8 +2,8 @@ import numpy as np
 from PIL import Image
 
 
-def extract():
-    image = Image.open("res/map3.bmp")
+def extract(path):
+    image = Image.open(path)
     image = image.convert("RGB")
 
     array = np.array(image)

@@ -4,18 +4,11 @@ from src.domain.BlockType import BlockType
 class GraphicsEngine:
 
     def __init__(self, game_engine, level):
+        self.screen_width = 800
+        self.screen_height = 630
         self.gameEngine = game_engine
         self.level = level
-        self.screen = game_engine.init_display(800, 630)
-        self.pause = False
-
-    def draw(self):
-        if self.pause:
-            self.draw_menu()
-        else:
-            self.draw_level()
-            self.draw_hud()
-        self.gameEngine.update_display()
+        self.screen = game_engine.init_display(self.screen_width, self.screen_height)
 
     def draw_level(self):
         self.gameEngine.screen_fill(self.screen, [200, 150, 0])
@@ -37,11 +30,31 @@ class GraphicsEngine:
                 case BlockType.WALL:
                     self.gameEngine.draw_rect(self.screen, (100, 50, 0), block.position())
 
-    def draw_menu(self):
-        self.gameEngine.screen_fill(self.screen, [20, 20, 20])
-        self.gameEngine.draw_text(self.screen, "Menu", [390, 100])
+        self.draw_hud()
+        self.gameEngine.update_display()
 
     def draw_hud(self):
-        self.gameEngine.draw_rect(self.screen, [20, 20, 20], [0, 600, 800, 30])
+        self.gameEngine.draw_rect(self.screen, [20, 20, 20], [0, self.screen_height, self.screen_width, 30])
         self.gameEngine.draw_text(self.screen, "Health: " + str(self.level.player.health), [5, 605])
         self.gameEngine.draw_text(self.screen, "Keys: " + str(self.level.player.keys), [150, 605])
+
+    def draw_menu(self, levels, selected):
+        center_x = self.screen_width/2
+        box_width = 300
+        box_height = 75
+        box_pos_y = 150
+        box_pos_x = center_x - box_width/2
+        self.gameEngine.screen_fill(self.screen, [20, 20, 20])
+        self.gameEngine.draw_text(self.screen, "Select", [center_x - 30, 100])
+        i = 1
+        for level in levels:
+            self.gameEngine.draw_button(
+                self.screen,
+                (100, 200, 100) if i-1 == selected else (100, 100, 100),
+                [box_pos_x, box_pos_y, box_width, box_height],
+                "Level " + str(i) + " " + level
+            )
+            box_pos_y += box_height + 10
+            i += 1
+
+        self.gameEngine.update_display()

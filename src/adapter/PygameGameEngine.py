@@ -11,6 +11,8 @@ class PygameGameEngine(GameEngine):
         self.clock = pygame.time.Clock()
         self.event_handler = event_handler
         self.font = pygame.font.SysFont(None, 30)
+        self.key_last_down = False
+        self.key_last_up = False
 
     def tick_clock(self, framerate):
         self.clock.tick(framerate)
@@ -24,26 +26,32 @@ class PygameGameEngine(GameEngine):
         up = False
         right = False
         left = False
-        down = False
-        esc = False
 
         pygame_key = pygame.key.get_pressed()
 
         if pygame_key[pygame.K_UP]:
             up = True
+            self.key_last_up = True
+        elif self.key_last_up:
+            self.event_handler(self.event_handler.Events.KEY_UP)
+            self.key_last_up = False
         if pygame_key[pygame.K_RIGHT]:
             right = True
         if pygame_key[pygame.K_DOWN]:
-            down = True
+            self.key_last_down = True
+        elif self.key_last_down:
+            self.event_handler(self.event_handler.Events.KEY_DOWN)
+            self.key_last_down = False
         if pygame_key[pygame.K_LEFT]:
             left = True
+        if pygame_key[pygame.K_KP_ENTER] or pygame_key[pygame.K_RETURN]:
+            self.event_handler(self.event_handler.Events.KEY_ENTER)
         if pygame_key[pygame.K_r]:
             self.event_handler(self.event_handler.Events.RESET)
         if pygame_key[pygame.K_ESCAPE]:
-            self.event_handler(self.event_handler.Events.QUIT)
+            self.event_handler(self.event_handler.Events.KEY_ESC)
 
         self.event_handler(self.event_handler.Events.MOVE_PLAYER, left, up, right)
-        # self.event_handler(self.event_handler.Events.KEY_PRESSED, up, right, down, left)
 
     def clipline(self, block, x1, y1, x2, y2):
         pygame_block = pygame.Rect(block.position())
@@ -61,6 +69,11 @@ class PygameGameEngine(GameEngine):
     def draw_text(self, screen, text, position):
         img = self.font.render(text, True, [200, 200, 200])
         screen.blit(img, position)
+
+    def draw_button(self, screen, color, position, text):
+        self.draw_rect(screen, color, position)
+        img = self.font.render(text, True, [200, 200, 200])
+        screen.blit(img, [position[0]+position[2]/2-img.get_width()/2, position[1]+position[3]/2-img.get_height()/2])
 
     def update_display(self):
         pygame.display.update()

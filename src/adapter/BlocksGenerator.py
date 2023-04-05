@@ -18,8 +18,8 @@ class BlocksGenerator(Generator):
         ENEMY = [255, 0, 0]
         DOOR = [64, 64, 64]
 
-    def generate(self):
-        array = list(extractor.extract())
+    def generate(self, path):
+        array = list(extractor.extract(path))
         game_blocks = []
         enemies = []
         player = None
