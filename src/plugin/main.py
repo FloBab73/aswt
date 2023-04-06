@@ -1,12 +1,3 @@
-import os
-import sys
-
-from src.domain.Level import Level
-
-# Für Daniel, damit es ohne pycharm funktioniert
-print("In module products sys.path[0], __package__ ==", sys.path[0], __package__)
-sys.path[0] = os.getcwd()
-
 from src.adapter.PygameGameEngine import PygameGameEngine
 from src.plugin.EventHandler import EventHandler
 from src.application.GameLoop import GameLoop
