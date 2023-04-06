@@ -1,9 +1,9 @@
 import numpy as np
 
+from src.domain.Generator import Generator
 from src.domain.BlockType import BlockType
 from src.domain.Enemy import Enemy
 from src.domain.GameBlock import GameBlock
-from src.domain.Generator import Generator
 from src.domain.Player import Player
 from src.plugin import extractor
 
