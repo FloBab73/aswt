@@ -2,7 +2,7 @@ from src.adapter.PygameGameEngine import PygameGameEngine
 from src.plugin.EventHandler import EventHandler
 from src.application.GameLoop import GameLoop
 from src.application.GameManager import GameManager
-from src.adapter.BitmapBlocksGenerator import BlocksGenerator
+from src.adapter.BlocksGenerator import BlocksGenerator
 
 event_handler = EventHandler()
 game_engine = PygameGameEngine(event_handler)
