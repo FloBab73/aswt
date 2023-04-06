@@ -2,7 +2,6 @@ from src.application.CollisionDetection import CollisionDetection
 from src.application.GraphicsEngine import GraphicsEngine
 from src.application.PhysicsEngine import PhysicsEngine
 from src.domain.Level import Level
-from src.domain.Generator import Generator
 import glob
 
 
