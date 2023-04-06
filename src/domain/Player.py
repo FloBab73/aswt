@@ -27,13 +27,13 @@ class Player(MovingGameBlock):
     def modify_health(self, modifier):
         if modifier > 0:
             self._health += modifier
-            return
-        time_delta = datetime.now() - self._last_damage_time
-        if modifier < 0 and time_delta.microseconds > 100_000:
-            self._health += modifier
-            self._last_damage_time = datetime.now()
-            if self._health <= 0:
-                self.death()
+        else:
+            time_delta = datetime.now() - self._last_damage_time
+            if modifier < 0 and time_delta.microseconds > 100_000:
+                self._health += modifier
+                self._last_damage_time = datetime.now()
+                if self._health <= 0:
+                    self.death()
         self.health_str = str(self._health)
 
     def touch_block(self, block, direction):
