@@ -1,3 +1,4 @@
+from src.domain.BlockType import BlockType
 class Level:
 
     def __init__(self, event_handler, static_blocks, enemies, player):
@@ -18,6 +19,10 @@ class Level:
         event_handler.add(event_handler.Events.REMOVE_BLOCK, self.remove_block)
         event_handler.add(event_handler.Events.KILL_ENEMY, self.remove_enemy)
         event_handler.add(event_handler.Events.DOOR, self.try_open_door)
+        self.keys = 0
+        for block in static_blocks:
+            if block.block_type == BlockType.ITEM_KEY:
+                self.keys += 1
 
     def remove_block(self, x, y):
         for block in self.static_blocks:
@@ -44,7 +49,7 @@ class Level:
         self.all_blocks.extend(self.static_blocks + [self.player] + self.enemies)
 
     def try_open_door(self):
-        if self.player.keys == 3:
+        if self.player.keys == self.keys:
             self.door_open = True
-            self.event_handler(self.event_handler.Events.QUIT)
+            self.event_handler(self.event_handler.Events.QUIT_LEVEL)
             print("********* Door Open, Game Over ************")

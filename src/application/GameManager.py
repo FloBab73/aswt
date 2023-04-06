@@ -58,7 +58,7 @@ class GameManager:
         self.event_handler.add(self.event_handler.Events.KEY_DOWN, self.menu_down)
         self.event_handler.add(self.event_handler.Events.KEY_ENTER, self.start_level)
         self.event_handler.add(self.event_handler.Events.DEATH, self.quit_level)
-        self.event_handler.add(self.event_handler.Events.KEY_ESC, self.quit_level)
+        self.event_handler.add(self.event_handler.Events.QUIT_LEVEL, self.quit_level)
 
     def init_level(self):
         static_blocks, enemies, player = BlocksGenerator().generate(self.levels.get_level(self.menu.selected))
@@ -102,5 +102,5 @@ class GameManager:
             self.inMenu = False
             self.event_handler.remove(self.event_handler.Events.KEY_DOWN, self.menu_down)
             self.event_handler.remove(self.event_handler.Events.KEY_UP, self.menu_up)
-            self.event_handler.add(self.event_handler.Events.QUIT, self.quit_level)
+            self.event_handler.add(self.event_handler.Events.QUIT_LEVEL, self.quit_level)
             self.init_level()

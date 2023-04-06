@@ -15,7 +15,7 @@ from src.application.GameManager import GameManager
 event_handler = EventHandler()
 game_engine = PygameGameEngine(event_handler)
 game_loop = GameLoop(game_engine, event_handler)
-event_handler.add(event_handler.Events.QUIT, game_loop.quit)
+event_handler.add(event_handler.Events.QUIT_GAME, game_loop.quit)
 
 manger = GameManager(event_handler, game_engine)
 

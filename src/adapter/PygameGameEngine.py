@@ -20,7 +20,7 @@ class PygameGameEngine(GameEngine):
     def fetch_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.event_handler(self.event_handler.Events.QUIT)
+                self.event_handler(self.event_handler.Events.QUIT_GAME)
 
     def get_user_input(self):
         up = False
@@ -49,7 +49,7 @@ class PygameGameEngine(GameEngine):
         if pygame_key[pygame.K_r]:
             self.event_handler(self.event_handler.Events.RESET)
         if pygame_key[pygame.K_ESCAPE]:
-            self.event_handler(self.event_handler.Events.KEY_ESC)
+            self.event_handler(self.event_handler.Events.QUIT_LEVEL)
 
         self.event_handler(self.event_handler.Events.MOVE_PLAYER, left, up, right)
 

@@ -29,8 +29,8 @@ class EventHandler:
         KEY_DOWN = 14
         KEY_UP = 15
         KEY_ENTER = 16
-        KEY_ESC = 17
-        QUIT = 255
+        QUIT_LEVEL = 17
+        QUIT_GAME = 255
 
     def __init__(self):
         self._eventDict = {}
