@@ -1,6 +1,6 @@
 import numpy as np
 
-from src.application.Generator import Generator
+from src.domain.Generator import Generator
 from src.domain.BlockType import BlockType
 from src.domain.Enemy import Enemy
 from src.domain.GameBlock import GameBlock

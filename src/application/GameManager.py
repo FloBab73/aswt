@@ -1,8 +1,8 @@
 from src.application.CollisionDetection import CollisionDetection
 from src.application.GraphicsEngine import GraphicsEngine
-from src.adapter.BlocksGenerator import BlocksGenerator
 from src.application.PhysicsEngine import PhysicsEngine
 from src.domain.Level import Level
+from src.domain.Generator import Generator
 import glob
 
 
@@ -42,9 +42,10 @@ class GameManager:
                 level = self.levels[index]
             return level
 
-    def __init__(self, event_handler, game_engine):
+    def __init__(self, event_handler, game_engine, generator):
         self.event_handler = event_handler
         self.game_engine = game_engine
+        self.generator = generator
         self.inMenu = True
         self.levels = self.LevelFiles("res/")
         self.menu = self.Menu(self.levels.len)
@@ -61,7 +62,7 @@ class GameManager:
         self.event_handler.add(self.event_handler.Events.QUIT_LEVEL, self.quit_level)
 
     def init_level(self):
-        static_blocks, enemies, player = BlocksGenerator().generate(self.levels.get_level(self.menu.selected))
+        static_blocks, enemies, player = self.generator.generate(self.levels.get_level(self.menu.selected))
         player.add_event_handler(self.event_handler)
         level = Level(self.event_handler, static_blocks, enemies, player)
         self.graphics_engine = GraphicsEngine(self.game_engine, level)
