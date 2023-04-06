@@ -70,11 +70,6 @@ class Player(MovingGameBlock):
         self.event_handler(self.event_handler.Events.DEATH)
         print("X.X Du bist Tot X.X")
 
-    def resetPos(self):
-        self.x = self._startX
-        self.y = self._startY
-        self._health = 100
-
     def move(self, x, y):
         self.x += x
         self.y += y
