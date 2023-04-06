@@ -23,8 +23,8 @@ class TestCollisionDetection(TestCase):
         objects = [GameBlock(31, 10, 20, 20)]
         border = 0
 
-        assert Direction.RIGHT not in detection.detect(subject1, objects, border)
-        assert Direction.RIGHT in detection.detect(subject2, objects, border)
+        assert Direction.RIGHT not in detection.detect(subject1, objects, border, border)
+        assert Direction.RIGHT in detection.detect(subject2, objects, border, border)
 
     def test_detect_right_with_border(self):
         detection = initialise_collision_detection()
@@ -33,8 +33,8 @@ class TestCollisionDetection(TestCase):
         objects = [GameBlock(31, 10, 20, 20)]
         border = 1
 
-        assert Direction.RIGHT not in detection.detect(subject1, objects, border)
-        assert Direction.RIGHT in detection.detect(subject2, objects, border)
+        assert Direction.RIGHT not in detection.detect(subject1, objects, border, border)
+        assert Direction.RIGHT in detection.detect(subject2, objects, border, border)
 
     def test_detect_bottom_without_border(self):
         detection = initialise_collision_detection()
@@ -43,8 +43,8 @@ class TestCollisionDetection(TestCase):
         objects = [GameBlock(10, 31, 20, 20)]
         border = 0
 
-        assert Direction.BOTTOM not in detection.detect(subject1, objects, border)
-        assert Direction.BOTTOM in detection.detect(subject2, objects, border)
+        assert Direction.BOTTOM not in detection.detect(subject1, objects, border, border)
+        assert Direction.BOTTOM in detection.detect(subject2, objects, border, border)
 
     def test_detect_bottom_with_border(self):
         detection = initialise_collision_detection()
@@ -53,8 +53,8 @@ class TestCollisionDetection(TestCase):
         objects = [GameBlock(10, 31, 20, 20)]
         border = 1
 
-        assert Direction.BOTTOM not in detection.detect(subject1, objects, border)
-        assert Direction.BOTTOM in detection.detect(subject2, objects, border)
+        assert Direction.BOTTOM not in detection.detect(subject1, objects, border, border)
+        assert Direction.BOTTOM in detection.detect(subject2, objects, border, border)
 
     def test_detect_left_without_border(self):
         detection = initialise_collision_detection()
@@ -63,8 +63,8 @@ class TestCollisionDetection(TestCase):
         objects = [GameBlock(9, 10, 20, 20)]
         border = 0
 
-        assert Direction.LEFT not in detection.detect(subject1, objects, border)
-        assert Direction.LEFT in detection.detect(subject2, objects, border)
+        assert Direction.LEFT not in detection.detect(subject1, objects, border, border)
+        assert Direction.LEFT in detection.detect(subject2, objects, border, border)
 
     def test_detect_left_with_border(self):
         detection = initialise_collision_detection()
@@ -73,8 +73,8 @@ class TestCollisionDetection(TestCase):
         objects = [GameBlock(9, 10, 20, 20)]
         border = 1
 
-        assert Direction.LEFT not in detection.detect(subject1, objects, border)
-        assert Direction.LEFT in detection.detect(subject2, objects, border)
+        assert Direction.LEFT not in detection.detect(subject1, objects, border, border)
+        assert Direction.LEFT in detection.detect(subject2, objects, border, border)
 
     def test_detect_top_without_border(self):
         detection = initialise_collision_detection()
@@ -83,8 +83,8 @@ class TestCollisionDetection(TestCase):
         objects = [GameBlock(10, 9, 20, 20)]
         border = 0
 
-        assert Direction.TOP not in detection.detect(subject1, objects, border)
-        assert Direction.TOP in detection.detect(subject2, objects, border)
+        assert Direction.TOP not in detection.detect(subject1, objects, border, border)
+        assert Direction.TOP in detection.detect(subject2, objects, border, border)
 
     def test_detect_top_with_border(self):
         detection = initialise_collision_detection()
@@ -93,5 +93,5 @@ class TestCollisionDetection(TestCase):
         objects = [GameBlock(10, 9, 20, 20)]
         border = 1
 
-        assert Direction.TOP not in detection.detect(subject1, objects, border)
-        assert Direction.TOP in detection.detect(subject2, objects, border)
+        assert Direction.TOP not in detection.detect(subject1, objects, border, border)
+        assert Direction.TOP in detection.detect(subject2, objects, border, border)

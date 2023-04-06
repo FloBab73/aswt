@@ -22,18 +22,25 @@ class TestPhysics(TestCase):
     def test_move_right(self):
         physics = initialise_physics()
         subject = MovingGameBlock(10, 10, 20, 20, BlockType.PLAYER)
-        objects = [GameBlock(35, 10, 20, 20)]
 
-        physics.move(subject, objects, 1, 0)
+        physics.move(subject, [], 1, 0)
         assert subject.x == 11
 
-    def test_move_against_wall(self):
+    def test_move_right_against_wall(self):
         physics = initialise_physics()
         subject = MovingGameBlock(10, 10, 20, 20, BlockType.PLAYER)
         objects = [GameBlock(35, 10, 20, 20)]
 
         physics.move(subject, objects, 10, 0)
         assert subject.x == 15
+
+    def test_move_left_against_wall(self):
+        physics = initialise_physics()
+        subject = MovingGameBlock(25, 0, 20, 20, BlockType.PLAYER)
+        objects = [GameBlock(0, 0, 20, 20)]
+
+        physics.move(subject, objects, -15, 0)
+        assert subject.x == 20
 
     def test_player_gravity_and_stop(self):
         event_handler = EventHandler()

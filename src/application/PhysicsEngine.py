@@ -8,43 +8,50 @@ class PhysicsEngine:
         self.level = level
         self.collision_detection = collision_detection
 
-    # moves player one pixel at a time to stop at the right moment
     def move(self, subject, objects, distance_x, distance_y):
         x = 0
         y = 0
-        if distance_x < 0:
-            x = -1
-            distance_x = abs(distance_x)
-        elif distance_x > 0:
-            x = 1
-        if distance_y < 0:
-            y = -1
-            distance_y = abs(distance_y)
-        elif distance_y > 0:
-            y = 1
-
         go_x = True
         go_y = True
+        direction_x = 0
+        direction_y = 0
+
+        if distance_x < 0:
+            direction_x = -1
+        elif distance_x > 0:
+            direction_x = 1
+        else:
+            go_x = False
+
+        if distance_y < 0:
+            direction_y = -1
+        elif distance_y > 0:
+            direction_y = 1
+        else:
+            go_y = False
+
         while go_x or go_y:
-            if distance_x > 0:
-                distance_x -= 1
-            else:
-                x = 0
+            touch = self.collision_detection.detect(subject, objects, abs(distance_x), abs(distance_y))
+
+            if Direction.RIGHT not in touch and direction_x == 1 or Direction.LEFT not in touch and direction_x == -1:
+                x = distance_x
                 go_x = False
-            if distance_y > 0:
-                distance_y -= 1
             else:
-                y = 0
+                if distance_x != 0:
+                    distance_x -= direction_x
+                else:
+                    go_x = False
+
+            if Direction.BOTTOM not in touch and direction_y == 1 or Direction.TOP not in touch and direction_y == -1:
+                y = distance_y
                 go_y = False
+            else:
+                if distance_y != 0:
+                    distance_y -= direction_y
+                else:
+                    go_y = False
 
-            subject.move(x, y)
-
-            touch = self.collision_detection.detect(subject, objects, 1)
-
-            if Direction.BOTTOM in touch or Direction.TOP in touch:
-                y = 0
-            if Direction.LEFT in touch or Direction.RIGHT in touch:
-                x = 0
+        subject.move(x, y)
 
     def move_player(self, key_left, key_up, key_right):
 
@@ -54,7 +61,7 @@ class PhysicsEngine:
             key_right = False
             self.level.player.stun -= 1
 
-        touch = self.collision_detection.detect(self.level.player, self.level.blocks_without_player, 1)
+        touch = self.collision_detection.detect(self.level.player, self.level.blocks_without_player, 1, 1)
 
         if Direction.BOTTOM in touch:
             if self.level.player.velocity_y > 0:
@@ -95,7 +102,7 @@ class PhysicsEngine:
     def move_enemies(self):
         for enemy in self.level.enemies:
 
-            touch = self.collision_detection.detect(enemy, self.level.blocks_without_enemies, 1)
+            touch = self.collision_detection.detect(enemy, self.level.blocks_without_enemies, 1, 1)
 
             if Direction.BOTTOM in touch:
                 enemy.velocity_y = 0
