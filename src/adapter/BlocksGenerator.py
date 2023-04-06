@@ -38,7 +38,7 @@ class BlocksGenerator(Generator):
                 elif np.array_equal(array[x][y], self.PixelType.DOOR):
                     game_blocks.append(GameBlock(y * 20, x * 20, 20, 20, BlockType.DOOR))
                 elif np.array_equal(array[x][y], self.PixelType.ENEMY):
-                    enemies.append(Enemy(y * 20 + 5, x * 20 + 5, 10, 10))
+                    enemies.append(Enemy(y * 20 + 5, x * 20 + 5, 11, 11))
                 elif np.array_equal(array[x][y], self.PixelType.PLAYER):
                     player = Player(y * 20 + 5, x * 20 + 5, 10, 10)
 
