@@ -15,11 +15,12 @@ class Player(MovingGameBlock):
         self._startX = x
         self.y = y
         self._startY = y
-        self._health = 100
+        self._health = 5
         self._keys = 0
         self._last_damage_time = datetime.now()
         self.keys_str = "0"
-        self.health_str = "100"
+        self.health_str = "5"
+        self.stun_time = 15
 
     def add_event_handler(self, event_handler):
         self.event_handler = event_handler
@@ -46,19 +47,19 @@ class Player(MovingGameBlock):
                     if direction == Direction.LEFT:
                         if block.velocity_x > 0:
                             self.velocity_x = block.velocity_x * 10
-                            self.stun = 20
+                            self.stun = self.stun_time
                         else:
-                            self.stun = 20
+                            self.stun = self.stun_time
                         self.velocity_y = -self.acceleration * 2
                     if direction == Direction.RIGHT:
                         if block.velocity_x < 0:
                             self.velocity_x = block.velocity_x * 10
-                            self.stun = 20
+                            self.stun = self.stun_time
                         else:
-                            self.stun = 20
+                            self.stun = self.stun_time
                         self.velocity_y = -self.acceleration * 2
             case BlockType.ITEM_HEAL:
-                self.modify_health(10)
+                self.modify_health(2)
                 self.event_handler(self.event_handler.Events.REMOVE_BLOCK, block.x, block.y)
             case BlockType.ITEM_KEY:
                 self.find_key()
