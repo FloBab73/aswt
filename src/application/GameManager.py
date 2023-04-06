@@ -104,4 +104,10 @@ class GameManager:
             self.event_handler.remove(self.event_handler.Events.KEY_DOWN, self.menu_down)
             self.event_handler.remove(self.event_handler.Events.KEY_UP, self.menu_up)
             self.event_handler.add(self.event_handler.Events.QUIT_LEVEL, self.quit_level)
+            self.event_handler.add(self.event_handler.Events.RESET, self.reset_level)
             self.init_level()
+
+    def reset_level(self):
+        self.event_handler.remove(self.event_handler.Events.MOVE_PLAYER, self.physics.move_player)
+        self.event_handler.remove(self.event_handler.Events.MOVE_ENEMIES, self.physics.move_enemies)
+        self.init_level()
