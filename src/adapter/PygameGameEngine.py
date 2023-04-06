@@ -14,6 +14,13 @@ class PygameGameEngine(GameEngine):
         self.key_last_down = False
         self.key_last_up = False
 
+    def get_events(self):
+        events = []
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                events.append("QUIT")
+        return events
+
     def tick_clock(self, framerate):
         self.clock.tick(framerate)
 
