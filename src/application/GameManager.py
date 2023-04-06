@@ -58,7 +58,7 @@ class GameManager:
         self.event_handler.add(self.event_handler.Events.KEY_UP, self.menu_up)
         self.event_handler.add(self.event_handler.Events.KEY_DOWN, self.menu_down)
         self.event_handler.add(self.event_handler.Events.KEY_ENTER, self.start_level)
-        self.event_handler.add(self.event_handler.Events.DEATH, self.quit_level)
+        self.event_handler.add(self.event_handler.Events.DEATH, self.reset_level())
         self.event_handler.add(self.event_handler.Events.QUIT_LEVEL, self.quit_level)
 
     def init_level(self):
