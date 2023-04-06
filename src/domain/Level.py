@@ -17,7 +17,6 @@ class Level:
         event_handler.add(event_handler.Events.PICKUP_HEALTH, player.modify_health)
         event_handler.add(event_handler.Events.PICKUP_KEY, player.find_key)
         event_handler.add(event_handler.Events.DAMAGE, player.modify_health)
-        event_handler.add(event_handler.Events.RESET, player.resetPos)
         event_handler.add(event_handler.Events.REMOVE_BLOCK, self.remove_block)
         event_handler.add(event_handler.Events.KILL_ENEMY, self.remove_enemy)
         event_handler.add(event_handler.Events.DOOR, self.try_open_door)
@@ -53,5 +52,12 @@ class Level:
     def try_open_door(self):
         if self.player.keys == self.keys and not self.door_open:
             self.door_open = True
+            self.event_handler.remove(self.event_handler.Events.PICKUP_HEALTH, self.player.modify_health)
+            self.event_handler.remove(self.event_handler.Events.PICKUP_KEY, self.player.find_key)
+            self.event_handler.remove(self.event_handler.Events.DAMAGE, self.player.modify_health)
+            self.event_handler.remove(self.event_handler.Events.REMOVE_BLOCK, self.remove_block)
+            self.event_handler.remove(self.event_handler.Events.KILL_ENEMY, self.remove_enemy)
+            self.event_handler.remove(self.event_handler.Events.DOOR, self.try_open_door)
             self.event_handler(self.event_handler.Events.QUIT_LEVEL)
             print("********* Door Open, Game Over ************")
+
