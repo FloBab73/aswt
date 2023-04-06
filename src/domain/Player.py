@@ -18,6 +18,8 @@ class Player(MovingGameBlock):
         self._health = 100
         self._keys = 0
         self._last_damage_time = datetime.now()
+        self.keys_str = "0"
+        self.health_str = "100"
 
     def add_event_handler(self, event_handler):
         self.event_handler = event_handler
@@ -32,6 +34,7 @@ class Player(MovingGameBlock):
             self._last_damage_time = datetime.now()
             if self._health <= 0:
                 self.death()
+        self.health_str = str(self._health)
 
     def touch_block(self, block, direction):
         match block.block_type:
@@ -58,7 +61,7 @@ class Player(MovingGameBlock):
                 self.modify_health(10)
                 self.event_handler(self.event_handler.Events.REMOVE_BLOCK, block.x, block.y)
             case BlockType.ITEM_KEY:
-                self._keys += 1
+                self.find_key()
                 self.event_handler(self.event_handler.Events.REMOVE_BLOCK, block.x, block.y)
             case BlockType.DOOR:
                 self.event_handler(self.event_handler.Events.DOOR)
@@ -86,3 +89,4 @@ class Player(MovingGameBlock):
 
     def find_key(self):
         self._keys += 1
+        self.keys_str = str(self._keys)

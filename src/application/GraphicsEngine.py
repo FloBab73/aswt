@@ -9,6 +9,8 @@ class GraphicsEngine:
         self.gameEngine = game_engine
         self.level = level
         self.screen = game_engine.init_display(self.screen_width, self.screen_height)
+        self.level_keys = str(level.keys)
+        self.hud_y = self.screen_height-30
 
     def draw_level(self):
         self.gameEngine.screen_fill(self.screen, [200, 150, 0])
@@ -34,9 +36,9 @@ class GraphicsEngine:
         self.gameEngine.update_display()
 
     def draw_hud(self):
-        self.gameEngine.draw_rect(self.screen, [20, 20, 20], [0, self.screen_height, self.screen_width, 30])
-        self.gameEngine.draw_text(self.screen, "Health: " + str(self.level.player.health), [5, 605])
-        self.gameEngine.draw_text(self.screen, "Keys: " + str(self.level.player.keys), [150, 605])
+        self.gameEngine.draw_rect(self.screen, [20, 20, 20], [0, self.hud_y, self.screen_width, 30])
+        self.gameEngine.draw_text(self.screen, "Health: " + self.level.player.health_str, [5, 605])
+        self.gameEngine.draw_text(self.screen, "Keys: "+self.level.player.keys_str+" / "+self.level_keys, [150, 605])
 
     def draw_menu(self, levels, selected):
         center_x = self.screen_width/2
