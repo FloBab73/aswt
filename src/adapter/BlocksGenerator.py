@@ -1,11 +1,11 @@
 import numpy as np
 
-from src.domain.Generator import Generator
 from src.domain.BlockType import BlockType
 from src.domain.Enemy import Enemy
 from src.domain.GameBlock import GameBlock
+from src.domain.Generator import Generator
 from src.domain.Player import Player
-from src.plugin import extractor
+from src.plugin import FileExtractor
 
 
 class BlocksGenerator(Generator):
@@ -19,7 +19,7 @@ class BlocksGenerator(Generator):
         DOOR = [64, 64, 64]
 
     def generate(self, path):
-        array = list(extractor.extract(path))
+        array = list(FileExtractor.extract_file(path))
         game_blocks = []
         enemies = []
         player = None
@@ -42,7 +42,7 @@ class BlocksGenerator(Generator):
                 elif np.array_equal(array[x][y], self.PixelType.PLAYER):
                     player = Player(y * 20 + 5, x * 20 + 5, 10, 10)
 
-        game_blocks.append(GameBlock(-5, -5, 810, 5, BlockType.WALL))  # top
+        game_blocks.append(GameBlock(-5, -10, 810, 10, BlockType.WALL))  # top
         game_blocks.append(GameBlock(800, -5, 5, 610, BlockType.WALL))  # right
         game_blocks.append(GameBlock(-2, 600, 804, 20, BlockType.WALL))  # bottom
         game_blocks.append(GameBlock(-5, -5, 5, 610, BlockType.WALL))  # left

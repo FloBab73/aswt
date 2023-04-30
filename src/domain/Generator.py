@@ -1,3 +1,3 @@
 class Generator:
-    def generate(self):
+    def generate(self, path):
         pass
