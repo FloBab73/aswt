@@ -8,7 +8,7 @@ class PhysicsEngine:
         self.level = level
         self.collision_detection = collision_detection
 
-    def move(self, subject, objects, distance_x, distance_y):
+    def move_block(self, subject, objects, distance_x, distance_y):
         x = 0
         y = 0
         go_x = True
@@ -96,8 +96,8 @@ class PhysicsEngine:
         if key_up and Direction.BOTTOM in touch:
             self.level.player.velocity_y = -9
 
-        self.move(self.level.player, self.level.blocks_without_player, self.level.player.velocity_x,
-                  self.level.player.velocity_y)
+        self.move_block(self.level.player, self.level.blocks_without_player, self.level.player.velocity_x,
+                        self.level.player.velocity_y)
 
     def move_enemies(self):
         for enemy in self.level.enemies:
@@ -122,4 +122,4 @@ class PhysicsEngine:
                 elif 0 <= enemy.velocity_x < enemy.max_speed:
                     enemy.velocity_x += enemy.acceleration
 
-            self.move(enemy, self.level.blocks_without_enemies, enemy.velocity_x, enemy.velocity_y)
+            self.move_block(enemy, self.level.blocks_without_enemies, enemy.velocity_x, enemy.velocity_y)
