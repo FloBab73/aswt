@@ -2,9 +2,9 @@ from unittest import TestCase
 
 from src.adapter.PygameGameEngine import PygameGameEngine
 from src.application.CollisionDetection import CollisionDetection, Direction
+from src.domain.ActiveGameBlock import ActiveGameBlock
 from src.domain.BlockType import BlockType
 from src.domain.GameBlock import GameBlock
-from src.domain.MovingGameBlock import MovingGameBlock
 from src.plugin.EventHandler import EventHandler
 
 
@@ -18,8 +18,8 @@ class TestCollisionDetection(TestCase):
 
     def test_detect_right_without_border(self):
         detection = initialise_collision_detection()
-        subject1 = MovingGameBlock(11, 11, 20, 20, BlockType.PLAYER)
-        subject2 = MovingGameBlock(12, 10, 20, 20, BlockType.PLAYER)
+        subject1 = ActiveGameBlock(11, 11, 20, 20, BlockType.PLAYER)
+        subject2 = ActiveGameBlock(12, 10, 20, 20, BlockType.PLAYER)
         objects = [GameBlock(31, 10, 20, 20)]
         border = 0
 
@@ -28,8 +28,8 @@ class TestCollisionDetection(TestCase):
 
     def test_detect_right_with_border(self):
         detection = initialise_collision_detection()
-        subject1 = MovingGameBlock(10, 10, 20, 20, BlockType.PLAYER)
-        subject2 = MovingGameBlock(11, 11, 20, 20, BlockType.PLAYER)
+        subject1 = ActiveGameBlock(10, 10, 20, 20, BlockType.PLAYER)
+        subject2 = ActiveGameBlock(11, 11, 20, 20, BlockType.PLAYER)
         objects = [GameBlock(31, 10, 20, 20)]
         border = 1
 
@@ -38,8 +38,8 @@ class TestCollisionDetection(TestCase):
 
     def test_detect_bottom_without_border(self):
         detection = initialise_collision_detection()
-        subject1 = MovingGameBlock(11, 11, 20, 20, BlockType.PLAYER)
-        subject2 = MovingGameBlock(10, 12, 20, 20, BlockType.PLAYER)
+        subject1 = ActiveGameBlock(11, 11, 20, 20, BlockType.PLAYER)
+        subject2 = ActiveGameBlock(10, 12, 20, 20, BlockType.PLAYER)
         objects = [GameBlock(10, 31, 20, 20)]
         border = 0
 
@@ -48,8 +48,8 @@ class TestCollisionDetection(TestCase):
 
     def test_detect_bottom_with_border(self):
         detection = initialise_collision_detection()
-        subject1 = MovingGameBlock(10, 10, 20, 20, BlockType.PLAYER)
-        subject2 = MovingGameBlock(11, 11, 20, 20, BlockType.PLAYER)
+        subject1 = ActiveGameBlock(10, 10, 20, 20, BlockType.PLAYER)
+        subject2 = ActiveGameBlock(11, 11, 20, 20, BlockType.PLAYER)
         objects = [GameBlock(10, 31, 20, 20)]
         border = 1
 
@@ -58,8 +58,8 @@ class TestCollisionDetection(TestCase):
 
     def test_detect_left_without_border(self):
         detection = initialise_collision_detection()
-        subject1 = MovingGameBlock(29, 11, 20, 20, BlockType.PLAYER)
-        subject2 = MovingGameBlock(28, 10, 20, 20, BlockType.PLAYER)
+        subject1 = ActiveGameBlock(29, 11, 20, 20, BlockType.PLAYER)
+        subject2 = ActiveGameBlock(28, 10, 20, 20, BlockType.PLAYER)
         objects = [GameBlock(9, 10, 20, 20)]
         border = 0
 
@@ -68,8 +68,8 @@ class TestCollisionDetection(TestCase):
 
     def test_detect_left_with_border(self):
         detection = initialise_collision_detection()
-        subject1 = MovingGameBlock(30, 10, 20, 20, BlockType.PLAYER)
-        subject2 = MovingGameBlock(29, 11, 20, 20, BlockType.PLAYER)
+        subject1 = ActiveGameBlock(30, 10, 20, 20, BlockType.PLAYER)
+        subject2 = ActiveGameBlock(29, 11, 20, 20, BlockType.PLAYER)
         objects = [GameBlock(9, 10, 20, 20)]
         border = 1
 
@@ -78,8 +78,8 @@ class TestCollisionDetection(TestCase):
 
     def test_detect_top_without_border(self):
         detection = initialise_collision_detection()
-        subject1 = MovingGameBlock(11, 29, 20, 20, BlockType.PLAYER)
-        subject2 = MovingGameBlock(10, 28, 20, 20, BlockType.PLAYER)
+        subject1 = ActiveGameBlock(11, 29, 20, 20, BlockType.PLAYER)
+        subject2 = ActiveGameBlock(10, 28, 20, 20, BlockType.PLAYER)
         objects = [GameBlock(10, 9, 20, 20)]
         border = 0
 
@@ -88,8 +88,8 @@ class TestCollisionDetection(TestCase):
 
     def test_detect_top_with_border(self):
         detection = initialise_collision_detection()
-        subject1 = MovingGameBlock(10, 30, 20, 20, BlockType.PLAYER)
-        subject2 = MovingGameBlock(11, 29, 20, 20, BlockType.PLAYER)
+        subject1 = ActiveGameBlock(10, 30, 20, 20, BlockType.PLAYER)
+        subject2 = ActiveGameBlock(11, 29, 20, 20, BlockType.PLAYER)
         objects = [GameBlock(10, 9, 20, 20)]
         border = 1
 

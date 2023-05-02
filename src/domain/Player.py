@@ -1,11 +1,11 @@
 from datetime import datetime
 
 from src.application.CollisionDetection import Direction
+from src.domain.ActiveGameBlock import ActiveGameBlock
 from src.domain.BlockType import BlockType
-from src.domain.MovingGameBlock import MovingGameBlock
 
 
-class Player(MovingGameBlock):
+class Player(ActiveGameBlock):
 
     def __init__(self, x=0, y=0, width=10, height=10):
         super().__init__(x, y, width, height, BlockType.PLAYER)

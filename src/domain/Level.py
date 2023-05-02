@@ -37,7 +37,6 @@ class Level:
         for block in self.enemies:
             if block.x == x and block.y == y:
                 self.enemies.remove(block)
-                print("removed")
                 break
         self.update_blocks()
 

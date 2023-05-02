@@ -1,7 +1,7 @@
 from src.domain.GameBlock import GameBlock
 
 
-class MovingGameBlock(GameBlock):
+class ActiveGameBlock(GameBlock):
     acceleration = 1
     deceleration = 1
     max_speed = 2

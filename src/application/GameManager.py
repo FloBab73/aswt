@@ -1,9 +1,10 @@
+import glob
+
 from src.application.CollisionDetection import CollisionDetection
 from src.application.GraphicsEngineLevel import GraphicsEngineLevel
-from src.application.PhysicsEngine import PhysicsEngine
 from src.application.GraphicsEngineMenu import GraphicsEngineMenu
+from src.application.PhysicsEngine import PhysicsEngine
 from src.domain.Level import Level
-import glob
 
 
 class GameManager:
@@ -84,7 +85,7 @@ class GameManager:
         if self.inMenu:
             self.menu.draw_menu()
         else:
-            self.graphics_engine.draw_level()
+            self.graphics_engine.draw()
 
     def quit_level(self):
         if not self.inMenu:
