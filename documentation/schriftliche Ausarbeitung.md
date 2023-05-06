@@ -31,11 +31,7 @@ Im Plugin sind Klassen definiert, die leicht austauschbar sein sollen. So ist es
 
 ## Entwurfsmuster
 
-Wir haben als Entwurfsmuster den Observer umgesetzt. Dafür wurde ein Event Handler implementiert. Dieser ermöglicht die Interaktion zwischen Klassen und ein dynamisches Verhalten auf ein Event. Die Klasse
-_EventHandler_ hat als innere Klasse _Events_. Sie hat die Methoden _add_ und
-_remove_, um die Events zu verwalten. Beim Hinzufügen eines Events wird eine Verknüpfung zwischen dem Event und der übergebenen Methode gespeichert. Um ein Event auszulösen wird die Instanz des Eventhandlers mit dem Event und eventuelle Parameter aufgerufen. Dann werden alle Funktionen, die für das Event registriert wurden, ausgeführt und die Parameter weitergeleitet.
-
-Das ist ein Observer, weil #TODO
+Wir haben als Entwurfsmuster den Observer umgesetzt. Dafür wurde ein Event Handler implementiert. Dieser ermöglicht die Interaktion zwischen mehreren Klassen und dynamisches Verhalten auf Events. Die Klasse _EventHandler_ hat als innere Klasse _Events_. Für die Verwaltung der Events gibt es die Methoden _add_ und _remove_. Beim Hinzufügen eines Events, wird die übergebenen Methode in der entsprechenden Eventliste gespeichert. Um ein Event auszulösen wird die Instanz des Eventhandlers mit dem Event und eventuelle Parameter aufgerufen. Dann werden alle Funktionen in der Eventliste ausgeführt und die Parameter weitergeleitet. Dies entspricht dem klassichen Beobachter Entwurfsmuster.
 
 ## Programming Principles
 
