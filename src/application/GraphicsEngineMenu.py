@@ -5,6 +5,7 @@ from src.domain.BlockType import BlockType
 class GraphicsEngineMenu(GraphicsEngine):
 
     def __init__(self, game_engine, levels):
+        super().__init__()
         self.gameEngine = game_engine
         self.screen = game_engine.init_display(self.screen_width, self.screen_height)
         self.selected = 0

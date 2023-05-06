@@ -5,6 +5,7 @@ from src.domain.GraphicsEngine import GraphicsEngine
 class GraphicsEngineLevel(GraphicsEngine):
 
     def __init__(self, game_engine, level):
+        super().__init__()
         self.gameEngine = game_engine
         self.screen = game_engine.init_display(self.screen_width, self.screen_height)
         self.level_keys = ""
