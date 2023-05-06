@@ -29,7 +29,6 @@ class Level:
         for block in self.static_blocks:
             if block.x == x and block.y == y:
                 self.static_blocks.remove(block)
-                print("removed")
                 break
         self.update_blocks()
 
