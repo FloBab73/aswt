@@ -24,6 +24,7 @@ class TestPhysics(TestCase):
         subject = ActiveGameBlock(10, 10, 20, 20, BlockType.PLAYER)
 
         physics.block_mover.move_block(subject, [], 1, 0)
+
         assert subject.x == 11
 
     def test_move_right_against_wall(self):
@@ -32,6 +33,7 @@ class TestPhysics(TestCase):
         objects = [GameBlock(35, 10, 20, 20)]
 
         physics.block_mover.move_block(subject, objects, 10, 0)
+
         assert subject.x == 15
 
     def test_move_left_against_wall(self):
@@ -40,14 +42,15 @@ class TestPhysics(TestCase):
         objects = [GameBlock(0, 0, 20, 20)]
 
         physics.block_mover.move_block(subject, objects, -15, 0)
+
         assert subject.x == 20
 
     def test_player_gravity_and_stop(self):
         event_handler = EventHandler()
         game_engine = PygameGameEngine(event_handler)
         collision_detection = CollisionDetection(game_engine, event_handler)
-        player = Player()
-        level = Level(event_handler, [GameBlock(0, 17, 20, 20)], [], player)
+        player = Player(0, 0)
+        level = Level(event_handler, [GameBlock(0, 15, 20, 20)], [], player)
         physics_engine = PhysicsEngine(collision_detection, level)
 
         physics_engine.move_player(False, False, False)
@@ -55,9 +58,7 @@ class TestPhysics(TestCase):
         physics_engine.move_player(False, False, False)
         assert player.y == 3
         physics_engine.move_player(False, False, False)
-        assert player.y == 6
-        physics_engine.move_player(False, False, False)
-        assert player.y == 7
+        assert player.y == 5
 
     def test_player_jump(self):
         event_handler = EventHandler()
