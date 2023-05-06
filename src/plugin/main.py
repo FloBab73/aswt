@@ -9,7 +9,7 @@ game_engine = PygameGameEngine(event_handler)
 game_loop = GameLoop(game_engine, event_handler)
 event_handler.add(event_handler.Events.QUIT_GAME, game_loop.quit)
 
-manager = GameManager(event_handler, game_engine, BlocksGenerator())
+GameManager(event_handler, game_engine, BlocksGenerator())
 
 while game_loop.is_running:
     game_loop.run()

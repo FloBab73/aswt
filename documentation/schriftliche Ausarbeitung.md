@@ -60,8 +60,7 @@ GameEngine
 
 #### I - Interface Segregation
 
-Innerhalb der GameBlock Vererbungskette existiert das Interface
-_MovingGameBlock_, das von GameBlock erbt. Dabei wird zur übernommenen Funktionalität die Möglichkeit der Bewegung und dem Reagieren auf andere Blöcke hinzugefügt. Diese Funktionalität wird für alle passiven Blöcke nicht gebraucht.
+GameEngine umprogramieren
 
 #### D - Dependency Inversion
 
@@ -71,11 +70,20 @@ _PygameGameEngine_ definiert und an den _GameLoop_ und
 _GameManager_ übergeben. Dort kann diese Klasse wie eine GameEngine genutzt werden. In Python ist es nicht nötig die Art der Klasse anzugeben, sodass die GameEngine hier auch weggelassen hätte können. Da die GameEngine, aber die Methoden definiert und die
 _PygameGameEngine_ alle Methoden implementieren muss, wird erzwungen, dass eine abgeleitete Klasse alle Funktionalitäten übernimmt.
 
+### GRASP
+
+#### High Cohesion
+
+#### Low Cuppling
+
+### DRY
+
 ## Tests
 
-In der Application wurden 12 Unit-Tests für zwei Klassen umgesetzt. Für die CollisionDetection sind 8 Tests vorhanden, um Kollisionen in alle vier Richtungen zu testen. Dafür gibt es für jede Richtung zwei Tests, da die detection mit und ohne border ausgeführt werden kann. Da das gewünschte Verhalten nicht Intuitiv zu programmieren ist, ist ein Test hier besonders wichtig, um das korrekte Verhalten sicherzustellen. An dieser Stelle hat der Test auch einmal einen Fehler erkannt. Während der Implementation der GameEngine, wurden Variablen durch einen Tippfehler falsch übergeben. Dadurch
-entstand ein Fehler, der beim Spielen nicht sofort offensichtlich war. Der Test
-hat aber angeschlagen, sodass der Fehler schnell gefunden und beseitigt werden
-konnte.
+In der Application wurden 12 Unit-Tests für zwei Klassen umgesetzt. Für die CollisionDetection sind 8 Tests vorhanden, um Kollisionen in alle vier Richtungen zu testen. Dafür gibt es für jede Richtung zwei Tests, da die detection mit und ohne border ausgeführt werden kann. Da das gewünschte Verhalten nicht Intuitiv zu programmieren ist, ist ein Test hier besonders wichtig, um das korrekte Verhalten sicherzustellen. An dieser Stelle hat der Test auch einmal einen Fehler erkannt. Während der Implementation der GameEngine, wurden Variablen durch einen Tippfehler falsch übergeben. Dadurch entstand ein Fehler, der beim Spielen nicht sofort offensichtlich war. Der Test hat aber angeschlagen, sodass der Fehler schnell gefunden und beseitigt werden konnte. atrip + code coverage
+
+### mocks
+
+extractor/generator
 
 ## Refactoring

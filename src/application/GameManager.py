@@ -56,13 +56,13 @@ class GameManager:
         self.generator = generator
         self.inMenu = True
         self.levels = self.LevelFiles("res/")
-        self.menu = self.Menu(GraphicsEngineMenu(game_engine, self.levels.levels))
+        self.menu = self.Menu(GraphicsEngineMenu(self.game_engine, self.levels.levels))
 
         self.graphics_engine = GraphicsEngineLevel(self.game_engine, {})
         self.physics = PhysicsEngine(CollisionDetection(self.game_engine, self.event_handler), self.levels)
 
         # Initial event register
-        self.event_handler.add(event_handler.Events.DRAW, self.draw)
+        self.event_handler.add(self.event_handler.Events.DRAW, self.draw)
         self.event_handler.add(self.event_handler.Events.KEY_UP, self.menu_up)
         self.event_handler.add(self.event_handler.Events.KEY_DOWN, self.menu_down)
         self.event_handler.add(self.event_handler.Events.KEY_ENTER, self.start_level)

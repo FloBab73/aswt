@@ -1,11 +1,13 @@
 from src.domain.BlockType import BlockType
+from src.domain.GraphicsEngine import GraphicsEngine
 
 
-class GraphicsEngineLevel:
+class GraphicsEngineLevel(GraphicsEngine):
 
     def __init__(self, game_engine, level):
         self.screen_width = 800
         self.screen_height = 630
+        # TODO in überklasse auslagern
         self.gameEngine = game_engine
         self.screen = game_engine.init_display(self.screen_width, self.screen_height)
         self.level_keys = ""
@@ -20,7 +22,7 @@ class GraphicsEngineLevel:
 
     def draw_level(self):
         self.gameEngine.screen_fill(self.screen, [200, 150, 0])
-
+        # TODO refactoring with dict for block type
         for block in self.level.all_blocks:
             match block.block_type:
                 case BlockType.ITEM_HEAL:
