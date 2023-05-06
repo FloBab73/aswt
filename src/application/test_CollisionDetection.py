@@ -18,80 +18,104 @@ class TestCollisionDetection(TestCase):
 
     def test_detect_right_without_border(self):
         detection = initialise_collision_detection()
-        subject1 = ActiveGameBlock(11, 11, 20, 20, BlockType.PLAYER)
-        subject2 = ActiveGameBlock(12, 10, 20, 20, BlockType.PLAYER)
+        subject_without_contact = ActiveGameBlock(11, 11, 20, 20, BlockType.PLAYER)
+        subject_with_contact = ActiveGameBlock(12, 10, 20, 20, BlockType.PLAYER)
         objects = [GameBlock(31, 10, 20, 20)]
         border = 0
 
-        assert Direction.RIGHT not in detection.detect(subject1, objects, border, border)
-        assert Direction.RIGHT in detection.detect(subject2, objects, border, border)
+        no_contact = detection.detect(subject_without_contact, objects, border, border)
+        contact = detection.detect(subject_with_contact, objects, border, border)
+
+        assert Direction.RIGHT not in no_contact
+        assert Direction.RIGHT in contact
 
     def test_detect_right_with_border(self):
         detection = initialise_collision_detection()
-        subject1 = ActiveGameBlock(10, 10, 20, 20, BlockType.PLAYER)
-        subject2 = ActiveGameBlock(11, 11, 20, 20, BlockType.PLAYER)
+        subject_without_contact = ActiveGameBlock(10, 10, 20, 20, BlockType.PLAYER)
+        subject_with_contact = ActiveGameBlock(11, 11, 20, 20, BlockType.PLAYER)
         objects = [GameBlock(31, 10, 20, 20)]
         border = 1
 
-        assert Direction.RIGHT not in detection.detect(subject1, objects, border, border)
-        assert Direction.RIGHT in detection.detect(subject2, objects, border, border)
+        no_contact = detection.detect(subject_without_contact, objects, border, border)
+        contact = detection.detect(subject_with_contact, objects, border, border)
+
+        assert Direction.RIGHT not in no_contact
+        assert Direction.RIGHT in contact
 
     def test_detect_bottom_without_border(self):
         detection = initialise_collision_detection()
-        subject1 = ActiveGameBlock(11, 11, 20, 20, BlockType.PLAYER)
-        subject2 = ActiveGameBlock(10, 12, 20, 20, BlockType.PLAYER)
+        subject_without_contact = ActiveGameBlock(11, 11, 20, 20, BlockType.PLAYER)
+        subject_with_contact = ActiveGameBlock(10, 12, 20, 20, BlockType.PLAYER)
         objects = [GameBlock(10, 31, 20, 20)]
         border = 0
 
-        assert Direction.BOTTOM not in detection.detect(subject1, objects, border, border)
-        assert Direction.BOTTOM in detection.detect(subject2, objects, border, border)
+        no_contact = detection.detect(subject_without_contact, objects, border, border)
+        contact = detection.detect(subject_with_contact, objects, border, border)
+
+        assert Direction.BOTTOM not in no_contact
+        assert Direction.BOTTOM in contact
 
     def test_detect_bottom_with_border(self):
         detection = initialise_collision_detection()
-        subject1 = ActiveGameBlock(10, 10, 20, 20, BlockType.PLAYER)
-        subject2 = ActiveGameBlock(11, 11, 20, 20, BlockType.PLAYER)
+        subject_without_contact = ActiveGameBlock(10, 10, 20, 20, BlockType.PLAYER)
+        subject_with_contact = ActiveGameBlock(11, 11, 20, 20, BlockType.PLAYER)
         objects = [GameBlock(10, 31, 20, 20)]
         border = 1
 
-        assert Direction.BOTTOM not in detection.detect(subject1, objects, border, border)
-        assert Direction.BOTTOM in detection.detect(subject2, objects, border, border)
+        no_contact = detection.detect(subject_without_contact, objects, border, border)
+        contact = detection.detect(subject_with_contact, objects, border, border)
+
+        assert Direction.BOTTOM not in no_contact
+        assert Direction.BOTTOM in contact
 
     def test_detect_left_without_border(self):
         detection = initialise_collision_detection()
-        subject1 = ActiveGameBlock(29, 11, 20, 20, BlockType.PLAYER)
-        subject2 = ActiveGameBlock(28, 10, 20, 20, BlockType.PLAYER)
+        subject_without_contact = ActiveGameBlock(29, 11, 20, 20, BlockType.PLAYER)
+        subject_with_contact = ActiveGameBlock(28, 10, 20, 20, BlockType.PLAYER)
         objects = [GameBlock(9, 10, 20, 20)]
         border = 0
 
-        assert Direction.LEFT not in detection.detect(subject1, objects, border, border)
-        assert Direction.LEFT in detection.detect(subject2, objects, border, border)
+        no_contact = detection.detect(subject_without_contact, objects, border, border)
+        contact = detection.detect(subject_with_contact, objects, border, border)
+
+        assert Direction.LEFT not in no_contact
+        assert Direction.LEFT in contact
 
     def test_detect_left_with_border(self):
         detection = initialise_collision_detection()
-        subject1 = ActiveGameBlock(30, 10, 20, 20, BlockType.PLAYER)
-        subject2 = ActiveGameBlock(29, 11, 20, 20, BlockType.PLAYER)
+        subject_without_contact = ActiveGameBlock(30, 10, 20, 20, BlockType.PLAYER)
+        subject_with_contact = ActiveGameBlock(29, 11, 20, 20, BlockType.PLAYER)
         objects = [GameBlock(9, 10, 20, 20)]
         border = 1
 
-        assert Direction.LEFT not in detection.detect(subject1, objects, border, border)
-        assert Direction.LEFT in detection.detect(subject2, objects, border, border)
+        no_contact = detection.detect(subject_without_contact, objects, border, border)
+        contact = detection.detect(subject_with_contact, objects, border, border)
+
+        assert Direction.LEFT not in no_contact
+        assert Direction.LEFT in contact
 
     def test_detect_top_without_border(self):
         detection = initialise_collision_detection()
-        subject1 = ActiveGameBlock(11, 29, 20, 20, BlockType.PLAYER)
-        subject2 = ActiveGameBlock(10, 28, 20, 20, BlockType.PLAYER)
+        subject_without_contact = ActiveGameBlock(11, 29, 20, 20, BlockType.PLAYER)
+        subject_with_contact = ActiveGameBlock(10, 28, 20, 20, BlockType.PLAYER)
         objects = [GameBlock(10, 9, 20, 20)]
         border = 0
 
-        assert Direction.TOP not in detection.detect(subject1, objects, border, border)
-        assert Direction.TOP in detection.detect(subject2, objects, border, border)
+        no_contact = detection.detect(subject_without_contact, objects, border, border)
+        contact = detection.detect(subject_with_contact, objects, border, border)
+
+        assert Direction.TOP not in no_contact
+        assert Direction.TOP in contact
 
     def test_detect_top_with_border(self):
         detection = initialise_collision_detection()
-        subject1 = ActiveGameBlock(10, 30, 20, 20, BlockType.PLAYER)
-        subject2 = ActiveGameBlock(11, 29, 20, 20, BlockType.PLAYER)
+        subject_without_contact = ActiveGameBlock(10, 30, 20, 20, BlockType.PLAYER)
+        subject_with_contact = ActiveGameBlock(11, 29, 20, 20, BlockType.PLAYER)
         objects = [GameBlock(10, 9, 20, 20)]
         border = 1
 
-        assert Direction.TOP not in detection.detect(subject1, objects, border, border)
-        assert Direction.TOP in detection.detect(subject2, objects, border, border)
+        no_contact = detection.detect(subject_without_contact, objects, border, border)
+        contact = detection.detect(subject_with_contact, objects, border, border)
+
+        assert Direction.TOP not in no_contact
+        assert Direction.TOP in contact

@@ -76,7 +76,39 @@ _PygameGameEngine_ alle Methoden implementieren muss, wird erzwungen, dass eine 
 
 ## Tests
 
-In der Application wurden 12 Unit-Tests für zwei Klassen umgesetzt. Für die CollisionDetection sind 8 Tests vorhanden, um Kollisionen in alle vier Richtungen zu testen. Dafür gibt es für jede Richtung zwei Tests, da die detection mit und ohne border ausgeführt werden kann. Da das gewünschte Verhalten nicht Intuitiv zu programmieren ist, ist ein Test hier besonders wichtig, um das korrekte Verhalten sicherzustellen. An dieser Stelle hat der Test auch einmal einen Fehler erkannt. Während der Implementation der GameEngine, wurden Variablen durch einen Tippfehler falsch übergeben. Dadurch entstand ein Fehler, der beim Spielen nicht sofort offensichtlich war. Der Test hat aber angeschlagen, sodass der Fehler schnell gefunden und beseitigt werden konnte. atrip + code coverage
+In der Application wurden 13 Unit-Tests für zwei Klassen umgesetzt. Für die CollisionDetection sind 8 Tests vorhanden, um Kollisionen in alle vier Richtungen zu testen. Dafür gibt es für jede Richtung zwei Tests, da die Detection mit und ohne border ausgeführt werden kann. Da das gewünschte Verhalten nicht Intuitiv zu programmieren ist, ist ein Test hier besonders wichtig, um das korrekte Verhalten sicherzustellen. An dieser Stelle hat der Test auch einmal einen Fehler erkannt. Während der Implementation der GameEngine, wurden Variablen durch einen Tippfehler falsch übergeben. Dadurch entstand ein Fehler, der beim Spielen nicht sofort offensichtlich war. Der Test hat aber angeschlagen, sodass der Fehler schnell gefunden und beseitigt werden konnte. Um die PhysicsEngine zu testen gibt es 5 Tests. Diese testen zunächst nur die Bewegung des Spielers. Dabei wird in einem Testfall auch überprüft, dass dieser nicht in eine Wand reinlaufen kann, auch wenn die Geschwindigkeit dies ermöglichen würde. Weitere Tests setzen eine Methode vorher an und testen ob die berechnung der Geschwindigkeit korrekt verläuft, indem der freie Fall auf den Boden und ein Sprung gegen die Decke getestet wird. An dieser Stelle könnten noch sehr viel mehr Testfälle implementiert werden, um verschiedene Bewegungsmuster, die andere Auswirkungen haben zu überprüfen.
+
+### AAA
+
+Arange, act, assert Die AAA Normalform wurde umgesetzt, indem in jedem Test klar zwischen Arrange, Act und Assert unterschieden wurde. So wird in allen Test in
+_test_CollisionDetection_ zunächst ein
+_CollisionDetection_ Objekt durch eine andere Methode erstellt. Als nächstes werden die Blocke, die interagieren erstellt. Die detection wird mit den Blöcken aufgerufen. Die in Variablen gespeicherten Werte, werden durch asserts überprüft. In
+_test_Physics_ kann das nicht komplett umgesetzt werden, da in zwei Tests ein Bewegungsablauf getestet wird. Dabei wird eine Funktion ausgeführt, die Auswirkung getestet und das wiederholt. Eine Aufteilung in mehrere Test wäre hier umständlich, da nur ein Sachverhalt getestet wird.
+
+### ATRIP
+
+#### Automatic
+
+Alle Tests lassen sich durch einen Klick ausführen lassen und erfordern kein Eingreifen. In Pycharm ist eingestellt, dass bei einem Commit automatisch alle Tests ausgeführt werden.
+
+#### Thorough
+
+Die Physik der Blöcke ist nicht intuitiv implementiert, da die Domain nicht intuitiv ist. Dementsprechend fielen dort viele Fehler an, sodass dieser Bereich ausführlich getestet ist.
+
+#### Repeatable
+
+Es sind keine Fälle von fehlerhaften Tests bekannt. Solange es keine Tests der Tests gibt, die Bewiesen korrekt sind, lässt sich diese Aussage nicht untermauern. Es wird nicht absichtlich auf Werte Zugegriffen, die von einer variablen Umgebung abhängig sind.
+
+#### Independent
+
+Alle Tests sind insofern unabhängig, dass sie komplett unabhängig laufen können und keine Werte aus anderen tests übernehmen. An allen Stellen an denen es möglich ist, wird nur genau ein Fehlerfall geprüft. An einigen Stellen ist dies nicht möglich. In
+_test_Physics_ wird die Reaktion des Players auf Benutzereingaben getestet. Da zunächst die Geschwindigkeit ausgerechnet wird und anschließend der Player bewegt wird, lässt sich im Fehlerfall noch nicht eindeutig feststellen, ob die Geschwindigkeitsrechnung und Bewegung einen Fehler hat. Das lässt sich auch nicht aufspalten, da die Geschwindigkeit nirgends gespeichert oder zurückgegeben wird, sondern direkt weitergegeben wird. Ein Tests kann also erst nach der Bewegungsfunktion die Auswirkungen prüfen. Ein Umbau der Funktionen, um diese besser testen zu können, wäre möglich, würde aber eine komplette Konzeptänderung erfordern. Da das Konzept an sich sinnvoll ist, haben wir entschieden diese Anpassung nicht zu übernehmen. In Zusammenspiel mit anderen Tests wird der Fehlerfall eingegrenzt da einer der beiden Fehlerfälle in anderen Tests überprüft wird. So lässt sich die Fehlerquelle eingrenzen.
+
+#### Professional
+
+Alle Tests und Variablen sind verständlich benannt, sodass sich sofort die Funktion ableiten lässt.
+
+### Code Coverage
 
 ### mocks
 
