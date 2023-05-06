@@ -1,4 +1,3 @@
-from src.domain.BlockType import BlockType
 from src.domain.GraphicsEngine import GraphicsEngine
 
 
@@ -12,15 +11,6 @@ class GraphicsEngineLevel(GraphicsEngine):
         self.hud_y = self.screen_height - 30
         self.level = level
         self.level_keys = str(level.keys)
-        self.blockColors = {
-                        BlockType.ITEM_HEAL: (100, 255, 0),
-                        BlockType.ITEM_KEY: (0, 38, 200),
-                        BlockType.ITEM_VALUABLE: (0, 200, 200),
-                        BlockType.DOOR: (64, 64, 64),
-                        BlockType.PLAYER: (255, 255, 255),
-                        BlockType.ENEMY: (255, 0, 0),
-                        BlockType.WALL: (100, 50, 0),
-        }
 
     def draw(self):
         self.draw_level()
@@ -30,8 +20,7 @@ class GraphicsEngineLevel(GraphicsEngine):
     def draw_level(self):
         self.gameEngine.screen_fill(self.screen, [200, 150, 0])
         for block in self.level.all_blocks:
-            if block.block_type in self.blockColors:
-                self.gameEngine.draw_rect(self.screen, self.blockColors[block.block_type], block.position())
+            self.gameEngine.draw_rect(self.screen, block.color, block.position())
 
     def draw_hud(self):
         self.gameEngine.draw_rect(self.screen, [20, 20, 20], [0, self.hud_y, self.screen_width, 30])
