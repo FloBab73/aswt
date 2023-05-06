@@ -7,8 +7,8 @@ from src.domain.BlockType import BlockType
 
 class Player(ActiveGameBlock):
 
-    def __init__(self, x=0, y=0, width=10, height=10):
-        super().__init__(x, y, width, height, BlockType.PLAYER)
+    def __init__(self, x=0, y=0, width=10, height=10, color=(255, 255, 255)):
+        super().__init__(x, y, width, height, color, BlockType.PLAYER)
         self.stun = 0
         self.event_handler = None
         self.x = x

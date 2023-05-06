@@ -8,8 +8,8 @@ class ActiveGameBlock(GameBlock):
     velocity_x = 0
     velocity_y = 0
 
-    def __init__(self, x, y, width, height, block_type):
-        super().__init__(x, y, width, height, block_type)
+    def __init__(self, x, y, width, height, color, block_type):
+        super().__init__(x, y, width, height, color, block_type)
 
     def move(self, x, y):
         self.x += x
