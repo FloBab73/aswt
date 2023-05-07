@@ -110,6 +110,10 @@ Alle Tests und Variablen sind verständlich benannt, sodass sich sofort die Funk
 
 ### Code Coverage
 
+Auf der untenstehenden Abbildung ist das Ergebnis der Code Coverage zu sehen. Die Darstellung von Pycharm ist dabei nicht ganz sinnvoll, da Dateien, wie init.py und die Tests selbst, mit in der Code Coverage auftauchen. Dabei ist es offensichtlich, dass diese Dateien 100% bzw. 0% Abdeckung haben. Diese Dateien wurden mit schwarz gekennzeichnet. Die Roten Dateien wurden nicht getestet und wurden dementsprechend auch nicht aufgerufen. Das sind die Klassen, die das Spiel verwalten, die Grafik ausgeben und die Karten generieren. Alle anderen Dateien wurden aufgerufen, wobei auffällt, dass deutlich mehr Dateien abgedeckt sind, als aktiv getestet wurden. Die Grünen sind die Klassen denen die Testfälle zuzuordnen sind. Die Türkisen wurden dafür auch in den Tests selbst benutzt, da sie für die Funktionalität nötig sind. Die Orangen wurden nicht direkt aufgerufen, sind aber trotzdem abgedeckt, da es Interfaces von benutzten Klassen sind.
+
+<img src="coverage.png" alt="hallo" title="Code coverage" width="500"/>
+
 ### mocks
 
 extractor/generator
