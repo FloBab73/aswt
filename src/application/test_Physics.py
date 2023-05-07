@@ -3,8 +3,6 @@ from unittest import TestCase
 from src.adapter.PygameGameEngine import PygameGameEngine
 from src.application.CollisionDetection import CollisionDetection
 from src.application.PhysicsEngine import PhysicsEngine
-from src.domain.ActiveGameBlock import ActiveGameBlock
-from src.domain.BlockType import BlockType
 from src.domain.GameBlock import GameBlock
 from src.domain.Level import Level
 from src.domain.Player import Player
@@ -21,7 +19,7 @@ class TestPhysics(TestCase):
 
     def test_move_right(self):
         physics = initialise_physics()
-        subject = ActiveGameBlock(10, 10, 20, 20, BlockType.PLAYER)
+        subject = Player(10, 10, 20, 20)
 
         physics.block_mover.move_block(subject, [], 1, 0)
 
@@ -29,7 +27,7 @@ class TestPhysics(TestCase):
 
     def test_move_right_against_wall(self):
         physics = initialise_physics()
-        subject = ActiveGameBlock(10, 10, 20, 20, BlockType.PLAYER)
+        subject = Player(10, 10, 20, 20)
         objects = [GameBlock(35, 10, 20, 20)]
 
         physics.block_mover.move_block(subject, objects, 10, 0)
@@ -38,7 +36,7 @@ class TestPhysics(TestCase):
 
     def test_move_left_against_wall(self):
         physics = initialise_physics()
-        subject = ActiveGameBlock(25, 0, 20, 20, BlockType.PLAYER)
+        subject = Player(25, 0, 20, 20)
         objects = [GameBlock(0, 0, 20, 20)]
 
         physics.block_mover.move_block(subject, objects, -15, 0)
