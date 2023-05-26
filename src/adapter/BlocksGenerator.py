@@ -3,11 +3,11 @@ from src.domain.Enemy import Enemy
 from src.domain.GameBlock import GameBlock
 from src.domain.Generator import Generator
 from src.domain.Player import Player
-from src.plugin import FileExtractor
 
 
 class BlocksGenerator(Generator):
-    def __init__(self):
+    def __init__(self, file_extractor):
+        self.file_extractor = file_extractor
         self.block_properties = {
             (255, 216, 0): {"width": 10, "height": 10, "color": (100, 255, 0), "offset": 5,
                             "type": BlockType.ITEM_HEAL},
@@ -19,7 +19,7 @@ class BlocksGenerator(Generator):
         }
 
     def generate(self, path):
-        colors = list(FileExtractor.extract_file(path))
+        colors = list(self.file_extractor.extract_file(path))
         game_blocks = []
         enemies = []
         player = None
