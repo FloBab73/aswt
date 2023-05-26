@@ -52,27 +52,39 @@ _GameBlock_ an einer beliebigen Stelle genutzt werden, um dem neuen Block aktiv 
 
 #### L - Liskov Substitution
 
-GameEngine
+Überall wo GameBlock steht, kann activegameblock eingesetzt werden. erweiterung, kein einschränken
 
 #### I - Interface Segregation
 
-GameEngine umprogramieren
+GameEngine umprogramieren, aufteilen draw und allgemein
 
 #### D - Dependency Inversion
 
-An vielen verschiedenen Stellen wird die Dependency Inversion genutzt. Als Beispiel soll hier die Game Engine dienen. Zunächst existiert das
+An vielen verschiedenen Stellen wird die Dependency Inversion genutzt. Als Beispiel soll hier die Game Engine dienen.
+Zunächst existiert das
 _GameEngine_ Interface. Die Funktionen werden von _PygameGameEngine_ implementiert. In der _main_ wird eine
 _PygameGameEngine_ definiert und an den _GameLoop_ und
-_GameManager_ übergeben. Dort kann diese Klasse wie eine GameEngine genutzt werden. In Python ist es nicht nötig die Art der Klasse anzugeben, sodass die GameEngine hier auch weggelassen hätte können. Da die GameEngine, aber die Methoden definiert und die
-_PygameGameEngine_ alle Methoden implementieren muss, wird erzwungen, dass eine abgeleitete Klasse alle Funktionalitäten übernimmt.
+_GameManager_ übergeben. Dort kann diese Klasse wie eine GameEngine genutzt werden. In Python ist es nicht nötig die Art
+der Klasse anzugeben, sodass die GameEngine hier auch weggelassen hätte können. Da die GameEngine, aber die Methoden
+definiert und die
+_PygameGameEngine_ alle Methoden implementieren muss, wird erzwungen, dass eine abgeleitete Klasse alle Funktionalitäten
+übernimmt.
 
 ### GRASP
 
+Daniel
+
 #### High Cohesion
+
+Level, Attribute hängen zusammen
 
 #### Low Cuppling
 
+Event handler, player kann enemyy/block kill/remove
+
 ### DRY
+
+collision detection, wird häufig aufgerufen
 
 ## Tests
 
@@ -80,10 +92,15 @@ In der Application wurden 13 Unit-Tests für zwei Klassen umgesetzt. Für die Co
 
 ### AAA
 
-Arange, act, assert Die AAA Normalform wurde umgesetzt, indem in jedem Test klar zwischen Arrange, Act und Assert unterschieden wurde. So wird in allen Test in
+Die AAA Normalform wurde umgesetzt, indem in jedem Test klar zwischen Arrange, Act und Assert unterschieden wurde. So
+wird in allen Test in
 _test_CollisionDetection_ zunächst ein
-_CollisionDetection_ Objekt durch eine andere Methode erstellt. Als nächstes werden die Blocke, die interagieren erstellt. Die detection wird mit den Blöcken aufgerufen. Die in Variablen gespeicherten Werte, werden durch asserts überprüft. In
-_test_Physics_ kann das nicht komplett umgesetzt werden, da in zwei Tests ein Bewegungsablauf getestet wird. Dabei wird eine Funktion ausgeführt, die Auswirkung getestet und das wiederholt. Eine Aufteilung in mehrere Test wäre hier umständlich, da nur ein Sachverhalt getestet wird.
+_CollisionDetection_ Objekt durch eine andere Methode erstellt. Als nächstes werden die Blocke, die interagieren
+erstellt. Die detection wird mit den Blöcken aufgerufen. Die in Variablen gespeicherten Werte, werden durch asserts
+überprüft. In
+_test_Physics_ kann das nicht komplett umgesetzt werden, da in zwei Tests ein Bewegungsablauf getestet wird. Dabei wird
+eine Funktion ausgeführt, die Auswirkung getestet und das wiederholt. Eine Aufteilung in mehrere Test wäre hier
+umständlich, da nur ein Sachverhalt getestet wird.
 
 ### ATRIP
 
@@ -112,10 +129,14 @@ Alle Tests und Variablen sind verständlich benannt, sodass sich sofort die Funk
 
 Auf der untenstehenden Abbildung ist das Ergebnis der Code Coverage zu sehen. Die Darstellung von Pycharm ist dabei nicht ganz sinnvoll, da Dateien, wie init.py und die Tests selbst, mit in der Code Coverage auftauchen. Dabei ist es offensichtlich, dass diese Dateien 100% bzw. 0% Abdeckung haben. Diese Dateien wurden mit schwarz gekennzeichnet. Die Roten Dateien wurden nicht getestet und wurden dementsprechend auch nicht aufgerufen. Das sind die Klassen, die das Spiel verwalten, die Grafik ausgeben und die Karten generieren. Alle anderen Dateien wurden aufgerufen, wobei auffällt, dass deutlich mehr Dateien abgedeckt sind, als aktiv getestet wurden. Die Grünen sind die Klassen denen die Testfälle zuzuordnen sind. Die Türkisen wurden dafür auch in den Tests selbst benutzt, da sie für die Funktionalität nötig sind. Die Orangen wurden nicht direkt aufgerufen, sind aber trotzdem abgedeckt, da es Interfaces von benutzten Klassen sind.
 
-<img src="coverage.png" alt="hallo" title="Code coverage" width="500"/>
+<img src="coverage.png" alt="code coverage" title="Code coverage" width="500"/>
 
 ### mocks
 
-extractor/generator
+extractor/generator. extractor gibt statisches level zurück
 
 ## Refactoring
+
+b7b7e9b1163c26da2d2a4e2e077fa5e530495103 dead code in enemy
+d100b13c25f82f2faadad4dccf1f289b71aa414b refactoring dict in in generator
+b691ef63e0b76895d4d2caca4f9f445402e3f875 klasse zu groß
