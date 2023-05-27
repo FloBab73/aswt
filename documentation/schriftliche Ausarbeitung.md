@@ -62,7 +62,11 @@ aufgerufen wird.
 
 #### I - Interface Segregation
 
-GameEngine umprogramieren, aufteilen draw und allgemein
+Die _Engine_, die als Adapter zwischen Pygame und dem restlichen Programm steht, wurde im
+Commit `d2cd48a6449e6e9502609b903fccfb5135dfe208` in zwei Teile geteilt. Dadurch wurde das Interface in die zwei Teile
+für Graphics und Game segregiert. Falls jetzt eine andere Engine verwendet werden soll, diese aber nur die Grphics
+abdecken soll, ist das deutlich einfacher, da ein Interface von einer anderen Interface implementiert werden muss, aber
+die implementierung des Game Interface bleibt unverändert bestehen.
 
 #### D - Dependency Inversion
 
