@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from src.adapter.PygameGameEngine import PygameGameEngine
+from src.adapter.PygameEngine import PygameGameEngine
 from src.application.CollisionDetection import CollisionDetection, Direction
 from src.domain.GameBlock import GameBlock
 from src.domain.Player import Player

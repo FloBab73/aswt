@@ -2,7 +2,7 @@ from src.application.BlockMover import BlockMover
 from src.application.CollisionDetection import Direction
 
 
-class PhysicsEngine:
+class Physics:
     gravity = 1
 
     def __init__(self, collision_detection, level):

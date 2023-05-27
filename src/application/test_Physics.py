@@ -1,8 +1,8 @@
 from unittest import TestCase
 
-from src.adapter.PygameGameEngine import PygameGameEngine
+from src.adapter.PygameEngine import PygameGameEngine
 from src.application.CollisionDetection import CollisionDetection
-from src.application.PhysicsEngine import PhysicsEngine
+from src.application.Physics import Physics
 from src.domain.GameBlock import GameBlock
 from src.domain.Level import Level
 from src.domain.Player import Player
@@ -12,7 +12,7 @@ from src.plugin.EventHandler import EventHandler
 def initialise_physics():
     event_handler = EventHandler()
     game_engine = PygameGameEngine(event_handler)
-    return PhysicsEngine(CollisionDetection(game_engine, event_handler), None)
+    return Physics(CollisionDetection(game_engine, event_handler), None)
 
 
 class TestPhysics(TestCase):
@@ -49,7 +49,7 @@ class TestPhysics(TestCase):
         collision_detection = CollisionDetection(game_engine, event_handler)
         player = Player(0, 0)
         level = Level(event_handler, [GameBlock(0, 15, 20, 20)], [], player)
-        physics_engine = PhysicsEngine(collision_detection, level)
+        physics_engine = Physics(collision_detection, level)
 
         physics_engine.move_player(False, False, False)
         assert player.y == 1
@@ -64,7 +64,7 @@ class TestPhysics(TestCase):
         collision_detection = CollisionDetection(game_engine, event_handler)
         player = Player(0, 20)
         level = Level(event_handler, [GameBlock(0, 30, 20, 20), GameBlock(0, -5, 20, 5)], [], player)
-        physics_engine = PhysicsEngine(collision_detection, level)
+        physics_engine = Physics(collision_detection, level)
 
         physics_engine.move_player(False, True, False)
         assert player.y == 11

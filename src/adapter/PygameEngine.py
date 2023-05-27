@@ -1,16 +1,14 @@
 import pygame
 
-from src.application.GameEngine import GameEngine
+from src.application.Engine import GameEngine, GraphicsEngine
 
 
 class PygameGameEngine(GameEngine):
 
     def __init__(self, event_handler):
-        super().__init__()
+        super().__init__(event_handler)
         pygame.init()
         self.clock = pygame.time.Clock()
-        self.event_handler = event_handler
-        self.font = pygame.font.SysFont(None, 30)
         self.key_last_down = False
         self.key_last_up = False
 
@@ -64,6 +62,13 @@ class PygameGameEngine(GameEngine):
         pygame_block = pygame.Rect(block.position())
         return pygame_block.clipline(x1, y1, x2, y2)
 
+
+class PygameGraphicsEngine(GraphicsEngine):
+
+    def __init__(self):
+        super().__init__()
+        self.font = pygame.font.SysFont(None, 30)
+
     def init_display(self, width, height):
         return pygame.display.set_mode((width, height))
 
@@ -80,7 +85,8 @@ class PygameGameEngine(GameEngine):
     def draw_button(self, screen, color, position, text):
         self.draw_rect(screen, color, position)
         img = self.font.render(text, True, [200, 200, 200])
-        screen.blit(img, [position[0]+position[2]/2-img.get_width()/2, position[1]+position[3]/2-img.get_height()/2])
+        screen.blit(img, [position[0] + position[2] / 2 - img.get_width() / 2,
+                          position[1] + position[3] / 2 - img.get_height() / 2])
 
     def update_display(self):
         pygame.display.update()
