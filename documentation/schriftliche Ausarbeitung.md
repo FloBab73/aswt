@@ -52,7 +52,13 @@ _GameBlock_ an einer beliebigen Stelle genutzt werden, um dem neuen Block aktiv 
 
 #### L - Liskov Substitution
 
-Überall wo GameBlock steht, kann activegameblock eingesetzt werden. erweiterung, kein einschränken
+Die Klassen _GameBlock_ und _ActiveGameBlock_ erfüllen das Liskov Substitution Prinzip. _GameBlock_ ist die
+Elternklasse, von der _ActiveGameBLock_ erbt. In dieser Vererbung werden zusätzliche Funktionalität hinzugefügt, wie
+dass der _ActiveGameBlock_ ein Funktion zum Verändern der Position hat. An keiner Stelle wird die Funktionalität
+eingeschränkt, sodass an jeder Stelle an der _GameBlock_ genutzt wird, auch der _ActiveGameBLock_ genutzt werden kann.
+So kann _BlocksGenerator_ in Zeile 44 der _GameBLock_ durch _ActiveGameBLock_ ersetzt werden und das Programm läuft ohne
+Probleme. Der einzige Unterschied ist, dass alle sonst statischen Blöcke eine Funktion zum Bewegen haben, die aber nie
+aufgerufen wird.
 
 #### I - Interface Segregation
 
@@ -84,7 +90,10 @@ Event handler, player kann enemyy/block kill/remove
 
 ### DRY
 
-collision detection, wird häufig aufgerufen
+Die am häufigsten von verschiedenen Stellen aufgerufene Klasse ist _CollisisonDetection_. An drei verschiedenen Stellen
+wird sie benutzt und trägt so zu Don't repeat yourself bei. An jeder der Stellen, hätte die Funktionalität separat
+implementiert werden können, da die FUnktion aber immer die gleiche ist, hat es von Anfang an Sinn ergeben diese
+auszulagern.
 
 ## Tests
 
@@ -162,5 +171,7 @@ an der Stelle noch Farben, definiert sind. Der Übergabeparameter _path_ wird da
 ## Refactoring
 
 b7b7e9b1163c26da2d2a4e2e077fa5e530495103 dead code in enemy
+
 d100b13c25f82f2faadad4dccf1f289b71aa414b refactoring dict in in generator
+
 b691ef63e0b76895d4d2caca4f9f445402e3f875 klasse zu groß
