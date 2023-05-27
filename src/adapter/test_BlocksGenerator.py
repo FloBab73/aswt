@@ -22,6 +22,10 @@ class TestBlocksGenerator(TestCase):
 
         game_blocks, enemies, player = blocks_generator.generate("path")
 
+        assert enemies[0].block_type == BlockType.ENEMY
+        assert enemies[0].x == 25
+        assert enemies[0].y == 5
+
         assert game_blocks[0].block_type == BlockType.WALL
         assert game_blocks[0].x == 0
         assert game_blocks[0].y == 20
@@ -33,7 +37,3 @@ class TestBlocksGenerator(TestCase):
         assert player.block_type == BlockType.PLAYER
         assert player.x == 25
         assert player.y == 25
-
-        assert enemies[0].block_type == BlockType.ENEMY
-        assert enemies[0].x == 25
-        assert enemies[0].y == 5

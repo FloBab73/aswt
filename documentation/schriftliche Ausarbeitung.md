@@ -118,8 +118,17 @@ Es sind keine Fälle von fehlerhaften Tests bekannt. Solange es keine Tests der 
 
 #### Independent
 
-Alle Tests sind insofern unabhängig, dass sie komplett unabhängig laufen können und keine Werte aus anderen tests übernehmen. An allen Stellen an denen es möglich ist, wird nur genau ein Fehlerfall geprüft. An einigen Stellen ist dies nicht möglich. In
-_test_Physics_ wird die Reaktion des Players auf Benutzereingaben getestet. Da zunächst die Geschwindigkeit ausgerechnet wird und anschließend der Player bewegt wird, lässt sich im Fehlerfall noch nicht eindeutig feststellen, ob die Geschwindigkeitsrechnung und Bewegung einen Fehler hat. Das lässt sich auch nicht aufspalten, da die Geschwindigkeit nirgends gespeichert oder zurückgegeben wird, sondern direkt weitergegeben wird. Ein Tests kann also erst nach der Bewegungsfunktion die Auswirkungen prüfen. Ein Umbau der Funktionen, um diese besser testen zu können, wäre möglich, würde aber eine komplette Konzeptänderung erfordern. Da das Konzept an sich sinnvoll ist, haben wir entschieden diese Anpassung nicht zu übernehmen. In Zusammenspiel mit anderen Tests wird der Fehlerfall eingegrenzt da einer der beiden Fehlerfälle in anderen Tests überprüft wird. So lässt sich die Fehlerquelle eingrenzen.
+Alle Tests sind insofern unabhängig, dass sie komplett unabhängig laufen können und keine Werte aus anderen tests
+übernehmen. An allen Stellen an denen es möglich ist, wird nur genau ein Fehlerfall geprüft. An einigen Stellen ist dies
+nicht möglich. In
+_test_Physics_ wird die Reaktion des Players auf Benutzereingaben getestet. Da zunächst die Geschwindigkeit ausgerechnet
+wird und anschließend der Player bewegt wird, lässt sich im Fehlerfall noch nicht eindeutig feststellen, ob die
+Geschwindigkeitsrechnung und Bewegung einen Fehler hat. Das lässt sich auch nicht aufspalten, da die Geschwindigkeit
+nirgends gespeichert oder zurückgegeben wird, sondern direkt weitergegeben wird. Ein Tests kann also erst nach der
+Bewegungsfunktion die Auswirkungen prüfen. Ein Umbau der Funktionen, um diese besser testen zu können, wäre möglich,
+würde aber eine komplette Konzeptänderung erfordern. Da das Konzept an sich sinnvoll ist, haben wir entschieden diese
+Anpassung nicht zu übernehmen. In Zusammenspiel mit anderen Tests wird der Fehlerfall eingegrenzt da einer der beiden
+Fehlerfälle in anderen Tests überprüft wird. So lässt sich die Fehlerquelle eingrenzen.
 
 #### Professional
 
@@ -127,13 +136,28 @@ Alle Tests und Variablen sind verständlich benannt, sodass sich sofort die Funk
 
 ### Code Coverage
 
-Auf der untenstehenden Abbildung ist das Ergebnis der Code Coverage zu sehen. Die Darstellung von Pycharm ist dabei nicht ganz sinnvoll, da Dateien, wie init.py und die Tests selbst, mit in der Code Coverage auftauchen. Dabei ist es offensichtlich, dass diese Dateien 100% bzw. 0% Abdeckung haben. Diese Dateien wurden mit schwarz gekennzeichnet. Die Roten Dateien wurden nicht getestet und wurden dementsprechend auch nicht aufgerufen. Das sind die Klassen, die das Spiel verwalten, die Grafik ausgeben und die Karten generieren. Alle anderen Dateien wurden aufgerufen, wobei auffällt, dass deutlich mehr Dateien abgedeckt sind, als aktiv getestet wurden. Die Grünen sind die Klassen denen die Testfälle zuzuordnen sind. Die Türkisen wurden dafür auch in den Tests selbst benutzt, da sie für die Funktionalität nötig sind. Die Orangen wurden nicht direkt aufgerufen, sind aber trotzdem abgedeckt, da es Interfaces von benutzten Klassen sind.
+Auf der untenstehenden Abbildung ist das Ergebnis der Code Coverage zu sehen. Die Darstellung von Pycharm ist dabei
+nicht ganz sinnvoll, da Dateien, wie init.py und die Tests selbst, mit in der Code Coverage auftauchen. Dabei ist es
+offensichtlich, dass diese Dateien 100% bzw. 0% Abdeckung haben. Diese Dateien wurden mit schwarz gekennzeichnet. Die
+Roten Dateien wurden nicht getestet und wurden dementsprechend auch nicht aufgerufen. Das sind die Klassen, die das
+Spiel verwalten, die Grafik ausgeben und die Karten generieren. Alle anderen Dateien wurden aufgerufen, wobei auffällt,
+dass deutlich mehr Dateien abgedeckt sind, als aktiv getestet wurden. Die Grünen sind die Klassen denen die Testfälle
+zuzuordnen sind. Die Türkisen wurden dafür auch in den Tests selbst benutzt, da sie für die Funktionalität nötig sind.
+Die Orangen wurden nicht direkt aufgerufen, sind aber trotzdem abgedeckt, da es Interfaces von benutzten Klassen sind.
+
+Die Abbildung ist bei dem Testdurchlauf der Tests in Application entstanden. Der Test TestBlocksGenerator ist nicht
+enthalten.
 
 <img src="coverage.png" alt="code coverage" title="Code coverage" width="500"/>
 
-### mocks
+### Mocks
 
-extractor/generator. extractor gibt statisches level zurück
+Für den Test _TestBlocksGenerator_ wurde ein Mock erstellt, um den _BlockGenerator_ zu testen, ohne dass eine Quelldatei
+benötigt wird. Die getestete Klasse bekommt vom _FileExtractor_ ein Array mit Farbwerten, aus denen Blöcke generiert
+werden. Abhängig von der Farbe wird ein anderer Block an der Position generiert. Diese Funktionalität wird getestet. Der
+_FileExtractor_ erhält normalerweise einen Dateipfad, über den eine .bmp Datei eingelesen wird und in ein Array
+umgewandelt wird. Um nicht davon abhängig zu sein, gibt das Mock ein statisches Array zurück, in dem bestimmte Blöcken,
+an der Stelle noch Farben, definiert sind. Der Übergabeparameter _path_ wird dabei ignoriert.
 
 ## Refactoring
 
