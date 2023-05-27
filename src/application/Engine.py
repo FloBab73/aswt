@@ -1,7 +1,7 @@
 class GameEngine:
 
-    def __init__(self):
-        pass
+    def __init__(self, event_handler):
+        self.event_handler = event_handler
 
     def get_events(self):
         pass
@@ -18,6 +18,8 @@ class GameEngine:
     def clipline(self, block, x1, y1, x2, y2):
         pass
 
+
+class GraphicsEngine:
     def init_display(self, width, height):
         pass
 

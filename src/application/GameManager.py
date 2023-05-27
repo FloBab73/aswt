@@ -1,40 +1,40 @@
 import glob
 
 from src.application.CollisionDetection import CollisionDetection
-from src.application.GraphicsEngineLevel import GraphicsEngineLevel
-from src.application.GraphicsEngineMenu import GraphicsEngineMenu
-from src.application.PhysicsEngine import PhysicsEngine
+from src.application.LevelGraphics import LevelGraphics
+from src.application.MenuGraphics import MenuGraphics
+from src.application.Physics import Physics
 from src.domain.Level import Level
 
 
 class GameManager:
     # inner class for menu
     class Menu:
-        def __init__(self, graphics_engine_menu):
-            self.len_levels = len(graphics_engine_menu.levels) - 1
-            self.graphics_engine_menu = graphics_engine_menu
+        def __init__(self, menu_graphics):
+            self.len_levels = len(menu_graphics.levels) - 1
+            self.menu_graphics = menu_graphics
 
         def select_next(self):
-            if self.graphics_engine_menu.selected == self.len_levels:
-                self.graphics_engine_menu.selected = 0
+            if self.menu_graphics.selected == self.len_levels:
+                self.menu_graphics.selected = 0
             else:
-                self.graphics_engine_menu.selected += 1
+                self.menu_graphics.selected += 1
 
         def select_previous(self):
-            if self.graphics_engine_menu.selected == 0:
-                self.graphics_engine_menu.selected = self.len_levels
+            if self.menu_graphics.selected == 0:
+                self.menu_graphics.selected = self.len_levels
             else:
-                self.graphics_engine_menu.selected -= 1
+                self.menu_graphics.selected -= 1
 
         @property
         def selected(self):
-            return self.graphics_engine_menu.selected
+            return self.menu_graphics.selected
 
         def draw_menu(self):
-            self.graphics_engine_menu.draw()
+            self.menu_graphics.draw()
 
         def reset(self):
-            self.graphics_engine_menu.selected = 0
+            self.menu_graphics.selected = 0
 
     class LevelFiles:
         # expected level path "res/map3.bmp"
@@ -50,16 +50,16 @@ class GameManager:
                 level = self.levels[index]
             return level
 
-    def __init__(self, event_handler, game_engine, generator):
+    def __init__(self, event_handler, engine, generator):
         self.event_handler = event_handler
-        self.game_engine = game_engine
+        self.engine = engine
         self.generator = generator
         self.inMenu = True
         self.levels = self.LevelFiles("res/")
-        self.menu = self.Menu(GraphicsEngineMenu(self.game_engine, self.levels.levels))
+        self.menu = self.Menu(MenuGraphics(self.engine, self.levels.levels))
 
-        self.graphics_engine = GraphicsEngineLevel(self.game_engine, {})
-        self.physics = PhysicsEngine(CollisionDetection(self.game_engine, self.event_handler), self.levels)
+        self.level_graphics = LevelGraphics(self.engine, {})
+        self.physics = Physics(CollisionDetection(self.engine, self.event_handler), self.levels)
 
         # Initial event register
         self.event_handler.add(self.event_handler.Events.DRAW, self.draw)
@@ -73,8 +73,8 @@ class GameManager:
         static_blocks, enemies, player = self.generator.generate(self.levels.get_level(self.menu.selected))
         player.add_event_handler(self.event_handler)
         level = Level(self.event_handler, static_blocks, enemies, player)
-        self.graphics_engine = GraphicsEngineLevel(self.game_engine, level)
-        self.physics = PhysicsEngine(CollisionDetection(self.game_engine, self.event_handler), level)
+        self.level_graphics = LevelGraphics(self.engine, level)
+        self.physics = Physics(CollisionDetection(self.engine, self.event_handler), level)
 
         self.event_handler.add(self.event_handler.Events.MOVE_PLAYER, self.physics.move_player)
         self.event_handler.add(self.event_handler.Events.MOVE_ENEMIES, self.physics.move_enemies)
@@ -85,7 +85,7 @@ class GameManager:
         if self.inMenu:
             self.menu.draw_menu()
         else:
-            self.graphics_engine.draw()
+            self.level_graphics.draw()
 
     def quit_level(self):
         if not self.inMenu:

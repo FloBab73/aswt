@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from src.adapter.PygameGameEngine import PygameGameEngine
+from src.adapter.PygameEngine import PygameEngine
 from src.application.CollisionDetection import CollisionDetection, Direction
 from src.domain.GameBlock import GameBlock
 from src.domain.Player import Player
@@ -9,7 +9,7 @@ from src.plugin.EventHandler import EventHandler
 
 def initialise_collision_detection():
     event_handler = EventHandler()
-    game_engine = PygameGameEngine(event_handler)
+    game_engine = PygameEngine(event_handler)
     return CollisionDetection(game_engine, event_handler)
 
 

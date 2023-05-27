@@ -1,4 +1,4 @@
-class GraphicsEngine:
+class Graphics:
 
     def __init__(self):
         self.screen_width = 800
