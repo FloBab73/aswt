@@ -97,13 +97,17 @@ _PygameGameEngine_ alle Methoden implementieren muss, wird erzwungen, dass eine 
 ### GRASP
 
 #### High Cohesion
-Durch die umsetzten von SOLID, ist in den meisten Klassen automatisch eine hohe Kohäsion entstanden.
-Beispielhaft an der Klasse Level gezeigt: Jede Funktion benutzt Attribute der Klasse. Gleichzeitig wird auch jedes Attribut in Mindestens einer Methode verwendet.
+Durch das Umsetzten von SOLID, ist in den meisten Klassen automatisch eine hohe Kohäsion entstanden.
+Beispielhaft an der Klasse _Level_ gezeigt: Jede Funktion benutzt Attribute der Klasse. Gleichzeitig wird auch jedes
+Attribut in Mindestens einer Methode verwendet.
 
 
 #### Low Coupling
-Der Observer (EventHandler) ermöglicht eine sehr lose kopplung. Dieser Vorteil kommt vor allem in der GameManager Klasse zum Tragen.
-So konnte die umschaltung der User-Eingabe vom Menu zum Spiel einfach umgesetzt werden, ohne an den restlichen klassen änderungen vornehmen zu müssen.
+
+Der Observer (_EventHandler_) ermöglicht eine sehr lose Kopplung. Dieser Vorteil kommt vor allem in der Klasse
+_GameManager_ zum Tragen.
+So konnte die Umschaltung der User-Eingabe vom Menu zum Spiel einfach umgesetzt werden, ohne an den restlichen Klassen
+Änderungen vornehmen zu müssen.
 
 ### DRY
 
@@ -206,13 +210,13 @@ dass beim Ändern der Implementierung nicht alles beseitigt wurde, was für den 
 neuen aber nicht. So wurde im Commit `b7b7e9b1163c26da2d2a4e2e077fa5e530495103` **Dead Code** in der Klasse _Enemy_
 beseitigt. Einige Eigenschaften und eine Funktion wurden nicht mehr benötigt.
 
-Bei der Suche nach Code smells, ist der match-case code in der GraphicsEngineLevel Klasse aufgefallen.
-Dieses **Switch Statements** ruft immer dieselbe Funktion auf. Nur mit unterschiedlichen Farbwerten, abhängig vom
+Bei der Suche nach Code Smells, ist der match-case Code in der _LevelGraphics_ Klasse aufgefallen.
+Dieses **Switch Statement** ruft immer dieselbe Funktion auf. Nur mit unterschiedlichen Farbwerten, abhängig vom
 BlockType.
-Mit dem Commit `d100b13c25f82f2faadad4dccf1f289b71aa414b` wurde es mit einem Dictionary ersetzt, dass als Key den
-BlockType hat und die Farbe als Value.
-Mit einem weiterem Refactor (`37b1f06b3bc10d0c96b04a71e6d4470c3279625c`), wurde die Information (Farbe) in die Klasse GameBlock verschoben und die zuordnung in
-BlocksGenerator. 
+Mit dem Commit `d100b13c25f82f2faadad4dccf1f289b71aa414b` wurde es mit einem Dictionary ersetzt, das als Key den
+_BlockType_ hat und die Farbe als Value.
+Mit einem weiterem Refactor (`37b1f06b3bc10d0c96b04a71e6d4470c3279625c`), wurde die Information (Farbe) in die Klasse
+_GameBlock_ verschoben und die Zuordnung in _BlocksGenerator_.
 
 Die _PhysicsEngine_ war zwischenzeitlich eine sehr **große Klasse**, da sie mehrere komplexe Funktionen beinhaltete. Um
 dem entgegenzuwirken, wurde im Commit `b691ef63e0b76895d4d2caca4f9f445402e3f875` eine Funktionalität in eine eigene
