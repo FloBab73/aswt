@@ -96,8 +96,6 @@ _PygameGameEngine_ alle Methoden implementieren muss, wird erzwungen, dass eine 
 
 ### GRASP
 
-Daniel
-
 #### High Cohesion
 Durch die umsetzten von SOLID, ist in den meisten Klassen automatisch eine hohe Kohäsion entstanden.
 Beispielhaft an der Klasse Level gezeigt: Jede Funktion benutzt Attribute der Klasse. Gleichzeitig wird auch jedes Attribut in Mindestens einer Methode verwendet.
@@ -106,11 +104,6 @@ Beispielhaft an der Klasse Level gezeigt: Jede Funktion benutzt Attribute der Kl
 #### Low Coupling
 Der Observer (EventHandler) ermöglicht eine sehr lose kopplung. Dieser Vorteil kommt vor allem in der GameManager Klasse zum Tragen.
 So konnte die umschaltung der User-Eingabe vom Menu zum Spiel einfach umgesetzt werden, ohne an den restlichen klassen änderungen vornehmen zu müssen.
-
-
-#### Low Coupling
-
-Event handler, player kann enemy/block kill/remove
 
 ### DRY
 
