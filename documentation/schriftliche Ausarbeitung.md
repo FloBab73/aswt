@@ -206,8 +206,13 @@ dass beim Ändern der Implementierung nicht alles beseitigt wurde, was für den 
 neuen aber nicht. So wurde im Commit `b7b7e9b1163c26da2d2a4e2e077fa5e530495103` **Dead Code** in der Klasse _Enemy_
 beseitigt. Einige Eigenschaften und eine Funktion wurden nicht mehr benötigt.
 
-Daniel
-`d100b13c25f82f2faadad4dccf1f289b71aa414b` refactoring dict in in generator
+Bei der Suche nach Code smells, ist der match-case code in der GraphicsEngineLevel Klasse aufgefallen.
+Dieses **Switch Statements** ruft immer dieselbe Funktion auf. Nur mit unterschiedlichen Farbwerten, abhängig vom
+BlockType.
+Mit dem Commit `d100b13c25f82f2faadad4dccf1f289b71aa414b` wurde es mit einem Dictionary ersetzt, dass als Key den
+BlockType hat und die Farbe als Value.
+Mit einem weiterem Refactor (`37b1f06b3bc10d0c96b04a71e6d4470c3279625c`), wurde die Information (Farbe) in die Klasse GameBlock verschoben und die zuordnung in
+BlocksGenerator. 
 
 Die _PhysicsEngine_ war zwischenzeitlich eine sehr **große Klasse**, da sie mehrere komplexe Funktionen beinhaltete. Um
 dem entgegenzuwirken, wurde im Commit `b691ef63e0b76895d4d2caca4f9f445402e3f875` eine Funktionalität in eine eigene
